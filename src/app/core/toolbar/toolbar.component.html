@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+  <header class="w-full h-full flex items-center">
+    <nav class="w-full h-full flex justify-between items-center">
+      <div class="brand">
+        <a routerLink="/">Bankist</a>
+      </div>
+      <div class="nav-items flex items-stretch gap-2 h-full">
+        <nav-link-item [link]="['/auth', 'login']" matRipple
+          >Login</nav-link-item
+        >
+        <nav-link-item [link]="['/auth', 'signup']" matRipple
+          >Signup</nav-link-item
+        >
+      </div>
+    </nav>
+  </header>
+</mat-toolbar>
