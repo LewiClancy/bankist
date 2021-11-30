@@ -1,1 +1,41 @@
-<p>login works!</p>
+<!-- <h1 class="mat-display-1">Bankist.</h1> -->
+<img
+  class="mat-display-1 pt-8"
+  src="../../../assets/images/logo.png"
+  alt="Bankist logo"
+/>
+<form [formGroup]="loginForm" (ngSubmit)="handleLogin()">
+  <mat-form-field>
+    <mat-label>Enter your email</mat-label>
+    <input
+      matInput
+      type="email"
+      auto-focus
+      placeholder="e.g. john@doe.com"
+      formControlName="email"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Enter your password</mat-label>
+    <input matInput [type]="passwordType" formControlName="password" />
+    <button
+      mat-icon-button
+      matSuffix
+      type="button"
+      (click)="togglePasswordVisibility()"
+    >
+      <mat-icon>
+        {{ passwordType === "password" ? "visibility_off" : "visibility" }}
+      </mat-icon>
+    </button>
+  </mat-form-field>
+  <div class="actions">
+    <button type="submit" mat-raised-button color="primary" class="self-start">
+      Login
+    </button>
+    |
+    <button type="button" mat-raised-button [routerLink]="['/auth', 'signup']">
+      Signup
+    </button>
+  </div>
+</form>
