@@ -1,0 +1,10 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  padding-block-start: 1.5rem;
+  max-width: 550px;
+}
+
+.names-field {
+  @apply flex flex-col sm:flex-row sm:gap-5;
+}

@@ -1,1 +1,146 @@
-<p>signup works!</p>
+<header class="my-8">
+  <h1>Welcome to bankist.</h1>
+</header>
+
+<section>
+  <p class="mat-subheading-2">Tell us about you.</p>
+  <form [formGroup]="signupForm" (ngSubmit)="handleSubmit()">
+    <mat-stepper orientation="vertical">
+      //TODO use braekpoint observers to set the orientation for diff screens.
+      <mat-step>
+        <ng-template matStepLabel>Enter your email address.</ng-template>
+        <div class="field">
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              type="email"
+              placeholder="john@doe.gmail.com"
+              autocomplete="email"
+              autofocus
+              formControlName="email"
+            />
+          </mat-form-field>
+          <button
+            type="button"
+            class="self-start"
+            mat-stroked-button
+            matStepperNext
+          >
+            Proceed
+          </button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel
+          >Fill out your personal information.</ng-template
+        >
+        <div class="field">
+          <div class="names-field">
+            <mat-form-field appearance="fill" class="flex-auto">
+              <mat-label>First name</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="John"
+                autocomplete="given-name"
+                autofocus
+                formControlName="firstName"
+              />
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="flex-auto">
+              <mat-label>Sir name</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Doe"
+                autocomplete="family-name"
+                formControlName="sirName"
+              />
+            </mat-form-field>
+          </div>
+          <mat-form-field appearance="fill">
+            <mat-label>Date of birth</mat-label>
+            <input
+              matInput
+              placeholder="MM/dd/yyyy"
+              [matDatepicker]="picker"
+              formControlName="dateOfBirth"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <div class="flex gap-5">
+            <button
+              type="button"
+              class="self-start"
+              mat-stroked-button
+              matStepperPrevious
+            >
+              Previous
+            </button>
+            <button
+              type="button"
+              class="self-start"
+              mat-stroked-button
+              matStepperNext
+            >
+              Proceed
+            </button>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Fill out your password.</ng-template>
+        <div class="field">
+          <mat-form-field appearance="fill" hintLabel="Min 6 charachters.">
+            <mat-label>New Password</mat-label>
+            <input
+              matInput
+              [type]="passwordFieldType"
+              autocomplete="new-password"
+              autofocus
+              formControlName="password"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              (click)="togglePasswordVisibility()"
+            >
+              <mat-icon>
+                {{
+                  passwordFieldType === "password"
+                    ? "visibility_off"
+                    : "visibility"
+                }}
+              </mat-icon>
+            </button>
+          </mat-form-field>
+          <div class="flex flex-col sm:flex-row gap-5">
+            <button
+              type="button"
+              class="self-start"
+              mat-stroked-button
+              matStepperNext
+            >
+              Previous
+            </button>
+            <button
+              type="submit"
+              class="self-start"
+              mat-raised-button
+              color="primary"
+              matStepperNext
+            >
+              Complete Registration
+            </button>
+          </div>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </form>
+</section>

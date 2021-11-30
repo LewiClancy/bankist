@@ -7,6 +7,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 const MaterialComponents = [
   MatToolbarModule,
@@ -16,6 +19,9 @@ const MaterialComponents = [
   MatFormFieldModule,
   MatInputModule,
   MatDividerModule,
+  MatStepperModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
 ];
 @NgModule({
   imports: [MaterialComponents],
