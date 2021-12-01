@@ -3,15 +3,17 @@
 </header>
 
 <section>
-  <p class="mat-subheading-2">Tell us about you.</p>
-  <form [formGroup]="signupForm" (ngSubmit)="handleSubmit()">
+  <p class="body-2">Tell us about you, And we'll create the account for you.</p>
+  <form [formGroup]="signupForm" (ngSubmit)="handleRegistration()">
     <mat-stepper orientation="vertical">
       //TODO use braekpoint observers to set the orientation for diff screens.
-      <mat-step>
-        <ng-template matStepLabel>Enter your email address.</ng-template>
+
+      <mat-step state="email" tabIndex="-1">
+        <ng-template matStepLabel>Fill out your email address.</ng-template>
         <div class="field">
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
+            <span matPrefix> <mat-icon color="primary">email</mat-icon> </span>
             <input
               matInput
               type="email"
@@ -23,21 +25,23 @@
           </mat-form-field>
           <button
             type="button"
-            class="self-start"
+            class="flex self-start"
             mat-stroked-button
+            color="primary"
             matStepperNext
           >
-            Proceed
+            Proceed <mat-icon> chevron_right </mat-icon>
           </button>
         </div>
       </mat-step>
-      <mat-step>
+
+      <mat-step state="personalInfo" tabIndex="-1">
         <ng-template matStepLabel
           >Fill out your personal information.</ng-template
         >
         <div class="field">
           <div class="names-field">
-            <mat-form-field appearance="fill" class="flex-auto">
+            <mat-form-field appearance="outline" class="flex-auto">
               <mat-label>First name</mat-label>
               <input
                 type="text"
@@ -48,18 +52,18 @@
                 formControlName="firstName"
               />
             </mat-form-field>
-            <mat-form-field appearance="fill" class="flex-auto">
-              <mat-label>Sir name</mat-label>
+            <mat-form-field appearance="outline" class="flex-auto">
+              <mat-label>Surname</mat-label>
               <input
                 type="text"
                 matInput
                 placeholder="Doe"
                 autocomplete="family-name"
-                formControlName="sirName"
+                formControlName="surname"
               />
             </mat-form-field>
           </div>
-          <mat-form-field appearance="fill">
+          <mat-form-field appearance="outline">
             <mat-label>Date of birth</mat-label>
             <input
               matInput
@@ -80,24 +84,83 @@
               mat-stroked-button
               matStepperPrevious
             >
-              Previous
+              <mat-icon> chevron_left </mat-icon> Previous
             </button>
             <button
               type="button"
               class="self-start"
               mat-stroked-button
+              color="primary"
               matStepperNext
             >
-              Proceed
+              Proceed <mat-icon> chevron_right </mat-icon>
             </button>
           </div>
         </div>
       </mat-step>
-      <mat-step>
+
+      <mat-step optional="isOptional" state="address" tabIndex="-1">
+        <ng-template matStepLabel>Fill out your adresses.</ng-template>
+        <div class="" formArrayName="addresses" class="field">
+          <ng-container
+            *ngFor="let address of addresses.controls; let i = index"
+          >
+            <mat-form-field appearance="outline">
+              <span matPrefix>
+                <mat-icon color="primary">{{
+                  i === 0 ? "home" : "contact_mail"
+                }}</mat-icon>
+              </span>
+              <mat-label>Adress {{ i + 1 }}</mat-label>
+              <input
+                type=""
+                matInput
+                [formControlName]="i"
+                [autocomplete]="'address-level' + (i + 1)"
+              />
+              <button mat-icon-button matSuffix (click)="removeAdress(i)">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+          </ng-container>
+          <div class="flex flex-col sm:flex-row gap-5">
+            <button
+              type="button"
+              class="self-start"
+              mat-stroked-button
+              (click)="addAddress()"
+            >
+              Add new adress <mat-icon> add </mat-icon>
+            </button>
+            <div class="flex gap-5">
+              <button
+                type="button"
+                class="self-start"
+                mat-stroked-button
+                matStepperPrevious
+              >
+                <mat-icon> chevron_left </mat-icon> Previous
+              </button>
+              <button
+                type="button"
+                class="self-start"
+                mat-stroked-button
+                color="primary"
+                matStepperNext
+              >
+                Proceed <mat-icon> chevron_right </mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-step>
+
+      <mat-step state="password" tabIndex="-1">
         <ng-template matStepLabel>Fill out your password.</ng-template>
         <div class="field">
-          <mat-form-field appearance="fill" hintLabel="Min 6 charachters.">
+          <mat-form-field appearance="outline" hintLabel="Min 6 charachters.">
             <mat-label>New Password</mat-label>
+            <span matPrefix> <mat-icon color="primary">lock</mat-icon> </span>
             <input
               matInput
               [type]="passwordFieldType"
@@ -120,27 +183,46 @@
               </mat-icon>
             </button>
           </mat-form-field>
-          <div class="flex flex-col sm:flex-row gap-5">
+          <div class="flex flex-col mt-2 sm:flex-row gap-5">
             <button
               type="button"
               class="self-start"
               mat-stroked-button
               matStepperNext
             >
-              Previous
-            </button>
-            <button
-              type="submit"
-              class="self-start"
-              mat-raised-button
-              color="primary"
-              matStepperNext
-            >
-              Complete Registration
+              <mat-icon> chevron_left </mat-icon>Previous
             </button>
           </div>
         </div>
       </mat-step>
+
+      <!-- icon overrides -->
+      <ng-template matStepperIcon="email">
+        <mat-icon>email</mat-icon>
+      </ng-template>
+
+      <ng-template matStepperIcon="personalInfo">
+        <mat-icon>person</mat-icon>
+      </ng-template>
+
+      <ng-template matStepperIcon="address">
+        <mat-icon>home</mat-icon>
+      </ng-template>
+
+      <ng-template matStepperIcon="password">
+        <mat-icon>password</mat-icon>
+      </ng-template>
     </mat-stepper>
+
+    <div class="form-actions m-6">
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="!signupForm.valid"
+      >
+        Create account
+      </button>
+    </div>
   </form>
 </section>

@@ -1,11 +1,16 @@
 <!-- <h1 class="mat-display-1">Bankist.</h1> -->
-<img
-  class="mat-display-1 pt-8"
-  src="../../../assets/images/logo.png"
-  alt="Bankist logo"
-/>
+<header>
+  <img
+    class="mat-display-1"
+    src="../../../assets/images/logo.png"
+    alt="Bankist logo"
+  />
+
+  <h1>Login into your bankist account.</h1>
+</header>
 <form [formGroup]="loginForm" (ngSubmit)="handleLogin()">
-  <mat-form-field>
+  <mat-form-field appearance="outline">
+    <span matPrefix> <mat-icon color="primary">email</mat-icon> </span>
     <mat-label>Enter your email</mat-label>
     <input
       matInput
@@ -15,8 +20,9 @@
       formControlName="email"
     />
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>Enter your password</mat-label>
+    <span matPrefix> <mat-icon color="primary">lock</mat-icon> </span>
     <input matInput [type]="passwordType" formControlName="password" />
     <button
       mat-icon-button
@@ -33,8 +39,8 @@
     <button type="submit" mat-raised-button color="primary" class="self-start">
       Login
     </button>
-    |
-    <button type="button" mat-raised-button [routerLink]="['/auth', 'signup']">
+    or
+    <button type="button" mat-raised-button (click)="switchToSignup()">
       Signup
     </button>
   </div>

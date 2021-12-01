@@ -1,6 +1,15 @@
-:host {
+@mixin center {
   display: grid;
   place-items: center;
+}
+
+:host {
+  @include center;
+}
+
+header {
+  @include center;
+  @apply py-8;
 }
 
 form {
@@ -16,6 +25,6 @@ form {
   gap: 1rem;
 }
 
-mat-form-field {
-  font-size: 1rem;
+span[matPrefix] {
+  margin-inline-end: 2rem;
 }
