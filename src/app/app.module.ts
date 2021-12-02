@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +17,6 @@ import { DashboardModule } from './dashboard/dashboard.module';
     ReactiveFormsModule,
     CoreModule,
     SharedModule,
-    DashboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
