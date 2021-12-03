@@ -7,7 +7,8 @@ import { MiniTransactionsComponent } from './mini-transactions/mini-transactions
 import { MiniSummaryComponent } from './mini-summary/mini-summary.component';
 import { MiniUserInfoComponent } from './mini-user-info/mini-user-info.component';
 import { DashboardLinkComponent } from './dashboard-link/dashboard-link.component';
-
+import { SharedModule } from '../shared/shared.module';
+import { LinkHoverDirective } from './link-hover-directive/link-hover.directive';
 
 @NgModule({
   declarations: [
@@ -15,11 +16,9 @@ import { DashboardLinkComponent } from './dashboard-link/dashboard-link.componen
     MiniTransactionsComponent,
     MiniSummaryComponent,
     MiniUserInfoComponent,
-    DashboardLinkComponent
+    DashboardLinkComponent,
+    LinkHoverDirective,
   ],
-  imports: [
-    CommonModule,
-    DashboardRoutingModule
-  ]
+  imports: [SharedModule, DashboardRoutingModule],
 })
-export class DashboardModule { }
+export class DashboardModule {}

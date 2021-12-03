@@ -1,0 +1,31 @@
+.summary__card {
+  --gap: 0.5rem;
+  --padding: 1rem;
+
+  font-size: 16px;
+  padding: var(--padding);
+
+  &--title {
+    --padding: 0.5rem;
+    padding-block-end: var(--padding);
+  }
+
+  &--content {
+    display: grid;
+    align-items: center;
+    justify-items: start;
+    row-gap: var(--gap);
+
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+
+  & > * {
+    @apply text-lg;
+  }
+}
+
+a[mat-stroked-button] {
+  grid-column: 1 / span 2;
+  justify-self: center;
+}

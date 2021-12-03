@@ -10,6 +10,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
 
 const MaterialComponents = [
   MatToolbarModule,
@@ -22,6 +23,7 @@ const MaterialComponents = [
   MatStepperModule,
   MatDatepickerModule,
   MatNativeDateModule,
+  MatCardModule,
 ];
 @NgModule({
   imports: [MaterialComponents],
