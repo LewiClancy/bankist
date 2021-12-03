@@ -1,14 +1,17 @@
 <app-mini-user-info id="user-info" class="hidden"></app-mini-user-info>
 <app-mini-summary id="summary"></app-mini-summary>
 <div id="links">
-  <app-dashboard-link appLinkHover linkTo="/transact"
-    >Transact</app-dashboard-link
-  >
-  <app-dashboard-link appLinkHover linkTo="/request-loan"
-    >Request Loan</app-dashboard-link
-  >
-  <app-dashboard-link appLinkHover linkTo="/transactions"
-    >Transactions</app-dashboard-link
-  >
+  <a class="dash__link" appLinkHover matRipple>
+    <span>Transact</span>
+    <mat-icon color="primary" class="">north_east</mat-icon>
+  </a>
+  <a class="dash__link" appLinkHover matRipple>
+    <span>Request Loan</span>
+    <mat-icon class="">north_east</mat-icon>
+  </a>
+  <a class="dash__link" appLinkHover matRipple>
+    <span>Transactions</span>
+    <mat-icon color="warn" class="">north_east</mat-icon>
+  </a>
 </div>
 <app-mini-transactions id="transactions"></app-mini-transactions>
