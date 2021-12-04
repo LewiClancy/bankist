@@ -1,9 +1,11 @@
-<header class="my-8">
+<header class="my-8 px-4">
   <h1>Welcome to bankist.</h1>
 </header>
 
-<section>
-  <p class="body-2">Tell us about you, And we'll create the account for you.</p>
+<section class="px-4">
+  <h3 class="md:leading-6">
+    Tell us about you, <br />And we'll create the account for you.
+  </h3>
   <form [formGroup]="signupForm" (ngSubmit)="handleRegistration()">
     <mat-stepper orientation="vertical">
       //TODO use braekpoint observers to set the orientation for diff screens.
@@ -108,7 +110,7 @@
             <mat-form-field appearance="outline">
               <span matPrefix>
                 <mat-icon color="primary">{{
-                  i === 0 ? "home" : "contact_mail"
+                  i === 0 ? 'home' : 'contact_mail'
                 }}</mat-icon>
               </span>
               <mat-label>Adress {{ i + 1 }}</mat-label>
@@ -176,9 +178,9 @@
             >
               <mat-icon>
                 {{
-                  passwordFieldType === "password"
-                    ? "visibility_off"
-                    : "visibility"
+                  passwordFieldType === 'password'
+                    ? 'visibility_off'
+                    : 'visibility'
                 }}
               </mat-icon>
             </button>

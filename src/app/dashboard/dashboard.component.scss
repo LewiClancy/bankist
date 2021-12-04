@@ -1,9 +1,8 @@
 :host {
   --gap: 2rem;
-
-  margin-block-start: var(--gap);
+  margin-block: 2rem;
   display: grid;
-  gap: var(--gap);
+  row-gap: var(--gap);
 
   grid-template-columns: minmax(12rem, 30rem);
   grid-template-areas:
@@ -11,6 +10,23 @@
     'links'
     'transactions';
   justify-content: center;
+
+  @media (min-width: 768px) {
+    --gap: 1.5rem;
+    grid-template-columns: 1.5fr 1fr;
+    grid-template-areas:
+      'user transactions'
+      'summary transactions'
+      'links transactions';
+  }
+
+  @media (min-width: 1024px) {
+    --gap: 0.5rem;
+    grid-template-columns: 300px max-content 400px;
+    grid-template-areas:
+      'user summary transactions'
+      'user links transactions';
+  }
 }
 
 #user-info {
@@ -31,35 +47,4 @@
 
 #transactions {
   grid-area: transactions;
-}
-
-.dash__link {
-  cursor: pointer;
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: center;
-  flex: 1 1 0;
-  aspect-ratio: 1 / 0.5;
-  background-color: #ecebed;
-  border-radius: 4px;
-  transition: all 500ms ease;
-
-  mat-icon {
-    display: none !important;
-  }
-}
-
-.dash__link.mat-elavation-z2 .dash__link {
-  transform: translateY(10px);
-}
-
-@media (min-width: 480px) {
-  .dash__link {
-    font-size: 1rem;
-
-    mat-icon {
-      display: initial !important;
-    }
-  }
 }

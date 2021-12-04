@@ -1,17 +1,18 @@
-<app-mini-user-info id="user-info" class="hidden"></app-mini-user-info>
-<app-mini-summary id="summary"></app-mini-summary>
-<div id="links">
-  <a class="dash__link" appLinkHover matRipple>
-    <span>Transact</span>
-    <mat-icon color="primary" class="">north_east</mat-icon>
-  </a>
-  <a class="dash__link" appLinkHover matRipple>
-    <span>Request Loan</span>
-    <mat-icon class="">north_east</mat-icon>
-  </a>
-  <a class="dash__link" appLinkHover matRipple>
-    <span>Transactions</span>
-    <mat-icon color="warn" class="">north_east</mat-icon>
-  </a>
+<app-mini-user-info
+  id="user-info"
+  class="hidden md:block px-4"
+></app-mini-user-info>
+
+<app-mini-summary id="summary" class="px-4"></app-mini-summary>
+
+<div id="links" class="px-4">
+  <a mat-stroked-button
+    >Transact <mat-icon color="primary">chevron_right</mat-icon></a
+  ><a mat-stroked-button
+    >Loans <mat-icon color="primary">chevron_right</mat-icon></a
+  ><a mat-stroked-button
+    >Transactions <mat-icon color="primary">chevron_right</mat-icon></a
+  >
 </div>
-<app-mini-transactions id="transactions"></app-mini-transactions>
+
+<app-mini-transactions id="transactions" class="px-4"></app-mini-transactions>

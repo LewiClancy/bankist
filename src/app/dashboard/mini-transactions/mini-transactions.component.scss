@@ -1,0 +1,45 @@
+table {
+  width: 100%;
+}
+
+.transactions {
+  &__card {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition: all 500ms ease;
+
+      &:hover {
+        box-shadow: 0 0 5px 0 rgba(#000, 0.25);
+      }
+    }
+  }
+  &__title {
+    border-bottom: 1px solid lightgray;
+    padding-inline: 1rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3rem;
+    color: #fff;
+    background-color: #7986cb;
+    border-bottom: 1px solid lightgray;
+
+    display: flex;
+    align-items: center;
+  }
+  &__content {
+    margin-block-start: 2.5rem;
+    margin-block-end: 3rem;
+  }
+  &__action {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+  }
+}

@@ -6,7 +6,6 @@ import { MiniTransactionsComponent } from './mini-transactions/mini-transactions
 import { MiniSummaryComponent } from './mini-summary/mini-summary.component';
 import { MiniUserInfoComponent } from './mini-user-info/mini-user-info.component';
 import { SharedModule } from '../shared/shared.module';
-import { LinkHoverDirective } from './link-hover-directive/link-hover.directive';
 
 @NgModule({
   declarations: [
@@ -14,7 +13,6 @@ import { LinkHoverDirective } from './link-hover-directive/link-hover.directive'
     MiniTransactionsComponent,
     MiniSummaryComponent,
     MiniUserInfoComponent,
-    LinkHoverDirective,
   ],
   imports: [SharedModule, DashboardRoutingModule],
 })
