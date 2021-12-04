@@ -1,19 +1,17 @@
 .summary {
   &__card {
-    --spread: 5px;
-
-    border: 1px solid lightgray;
+    border: var(--box-border);
     border-radius: 5px;
     padding: 1rem;
     position: relative;
     overflow: hidden;
+    box-shadow: var(--box-shadow);
 
     @media (prefers-reduced-motion: no-preference) {
       transition: all 500ms ease;
-      box-shadow: 0 0 var(--spread) 0 rgba(#000, 0.25);
 
       &:hover {
-        --spread: 10px;
+        box-shadow: var(--box-shadow-huge);
       }
     }
   }
@@ -26,8 +24,8 @@
     right: 0;
     height: 3rem;
     color: #fff;
-    background-color: #7986cb;
-    border-bottom: 1px solid lightgray;
+    background-color: var(--clr-accent);
+    border-bottom: var(--box-border);
 
     display: flex;
     align-items: center;
