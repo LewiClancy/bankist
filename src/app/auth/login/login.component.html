@@ -1,13 +1,12 @@
-<!-- <h1 class="mat-display-1">Bankist.</h1> -->
 <header>
   <img
     class="mat-display-1"
     src="../../../assets/images/logo.png"
     alt="Bankist logo"
   />
-
   <h1>Login into your bankist account.</h1>
 </header>
+
 <form [formGroup]="loginForm" (ngSubmit)="handleLogin()">
   <mat-form-field appearance="outline">
     <span matPrefix> <mat-icon color="primary">email</mat-icon> </span>
@@ -31,7 +30,7 @@
       (click)="togglePasswordVisibility()"
     >
       <mat-icon>
-        {{ passwordType === "password" ? "visibility_off" : "visibility" }}
+        {{ passwordType === 'password' ? 'visibility_off' : 'visibility' }}
       </mat-icon>
     </button>
   </mat-form-field>

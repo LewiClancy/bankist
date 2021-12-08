@@ -1,6 +1,7 @@
 :host {
   display: grid;
   place-content: center;
+  margin-top: var(--margin-top);
 }
 
 .field {
