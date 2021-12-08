@@ -23,7 +23,7 @@
     right: 0;
     height: 3rem;
     color: #fff;
-    background-color: #7986cb;
+    background-color: var(--clr-accent);
   }
 
   &__content {
@@ -50,7 +50,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .user {
     &__card {
       height: 100%;
