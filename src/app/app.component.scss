@@ -5,6 +5,9 @@ app-toolbar {
   z-index: 4;
 }
 
+mat-sidenav-content {
+  min-height: 100vh;
+}
 mat-sidenav {
   width: 17rem;
 }
