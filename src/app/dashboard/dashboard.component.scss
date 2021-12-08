@@ -26,6 +26,10 @@
 
   @media (min-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      'user transactions'
+      'summary transactions'
+      '. links';
   }
 
   @media (min-width: 1280px) {
@@ -51,6 +55,10 @@
   gap: 1rem;
   align-items: center;
   justify-content: space-around;
+
+  @media (min-width: 1024px) {
+    transform: translatey(-60px);
+  }
 }
 
 #transactions {
