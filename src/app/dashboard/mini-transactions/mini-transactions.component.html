@@ -1,7 +1,8 @@
-<section class="transactions__card">
+<section class="transactions__card sm:overflow-hidden">
   <div class="transactions__title">
     <div class="text-xl lg:text-2xl">Transaction statements</div>
   </div>
+
   <div class="transactions__content">
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="recipient">

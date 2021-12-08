@@ -6,9 +6,9 @@ table {
   &__card {
     border: 1px solid lightgray;
     border-radius: 5px;
-    padding: 1rem;
     position: relative;
-    overflow: hidden;
+    display: grid;
+    grid-template-rows: 3rem auto;
 
     @media (prefers-reduced-motion: no-preference) {
       transition: all 500ms ease;
@@ -21,11 +21,6 @@ table {
   &__title {
     border-bottom: 1px solid lightgray;
     padding-inline: 1rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3rem;
     color: #fff;
     background-color: var(--clr-accent);
     border-bottom: 1px solid lightgray;
@@ -34,7 +29,7 @@ table {
     align-items: center;
   }
   &__content {
-    margin-block-start: 2.5rem;
+    padding: 1rem;
     margin-block-end: 3rem;
   }
   &__action {

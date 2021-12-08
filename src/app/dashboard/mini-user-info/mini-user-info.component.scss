@@ -1,11 +1,13 @@
 .user {
   &__card {
-    padding: 1rem;
     border: 1px solid lightgray;
     border-radius: 5px;
 
     position: relative;
     overflow: hidden;
+
+    display: grid;
+    grid-template-rows: 3rem 1fr;
 
     @media (prefers-reduced-motion: no-preference) {
       transition: all 500ms ease;
@@ -17,17 +19,12 @@
   }
   &__header {
     padding-inline: 1rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3rem;
     color: #fff;
     background-color: var(--clr-accent);
   }
 
   &__content {
-    margin-block-start: 3rem;
+    padding: 1rem;
 
     display: flex;
     justify-content: space-around;
