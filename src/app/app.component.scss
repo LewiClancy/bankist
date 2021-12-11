@@ -6,7 +6,8 @@ app-toolbar {
 }
 
 mat-sidenav-content {
-  min-height: 100vh;
+  margin-block-start: var(--margin-top);
+  min-height: calc(100vh - var(--margin-top));
 }
 mat-sidenav {
   width: 17rem;

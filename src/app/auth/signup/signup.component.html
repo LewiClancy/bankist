@@ -1,9 +1,9 @@
 <div class="container mx-auto px-4">
-  <header class="px-5 pt-5">
-    <h1>Welcome to bankist.</h1>
-    <h3 class="md:leading-6">
+  <header class="px-2 pt-5">
+    <h1 class="mat-display-1">Welcome to bankist.</h1>
+    <h2 class="md:leading-6">
       Tell us about you, <br />And we'll create the account for you.
-    </h3>
+    </h2>
   </header>
 
   <section id="signup">
@@ -13,6 +13,7 @@
 
         <mat-step state="email" tabIndex="-1">
           <ng-template matStepLabel>Fill out your email address.</ng-template>
+          <h3>Tell us your primary email adress.</h3>
           <div class="field">
             <mat-form-field appearance="outline">
               <mat-label>Email</mat-label>
@@ -44,6 +45,7 @@
           <ng-template matStepLabel
             >Fill out your personal information.</ng-template
           >
+          <h3>Tell us your primary information/</h3>
           <div class="field">
             <div class="names-field">
               <mat-form-field appearance="outline" class="flex-auto">
@@ -106,6 +108,7 @@
 
         <mat-step optional="isOptional" state="address" tabIndex="-1">
           <ng-template matStepLabel>Fill out your adresses.</ng-template>
+          <h3>Tell us your address(es)</h3>
           <div class="" formArrayName="addresses" class="field">
             <ng-container
               *ngFor="let address of addresses.controls; let i = index"
@@ -162,6 +165,11 @@
 
         <mat-step state="password" tabIndex="-1">
           <ng-template matStepLabel>Fill out your password.</ng-template>
+          <h3>
+            Choose a secure password. <br />
+            It should be longer than
+            <strong>6 charachters</strong>
+          </h3>
           <div class="field">
             <mat-form-field appearance="outline" hintLabel="Min 6 charachters.">
               <mat-label>New Password</mat-label>
