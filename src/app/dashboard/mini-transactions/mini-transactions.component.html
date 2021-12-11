@@ -5,17 +5,17 @@
 
   <div class="transactions__content">
     <table mat-table [dataSource]="dataSource">
-      <ng-container matColumnDef="recipient">
+      <ng-container matColumnDef="account">
         <th mat-header-cell *matHeaderCellDef>Recipient</th>
         <td mat-cell *matCellDef="let transaction">
-          {{ transaction.recipient | titlecase }}
+          {{ transaction.accountId | titlecase }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="type">
         <th mat-header-cell *matHeaderCellDef>Transaction type</th>
         <td mat-cell *matCellDef="let transaction">
-          {{ transaction.type | titlecase }}
+          {{ transaction.kind | titlecase }}
         </td>
       </ng-container>
 

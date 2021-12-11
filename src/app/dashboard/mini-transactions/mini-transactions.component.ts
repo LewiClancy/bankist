@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { Transaction } from 'src/app/core/models';
+import { TransactionsService } from 'src/app/core/services';
 
 @Component({
   selector: 'app-mini-transactions',
@@ -6,42 +9,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mini-transactions.component.scss'],
 })
 export class MiniTransactionsComponent implements OnInit {
-  dataSource = [
-    {
-      recipient: 'Lewis Ndungu',
-      type: 'deposit',
-      amount: '4000',
-    },
-    {
-      recipient: 'Lewis Ndungu',
-      type: 'withdrawal',
-      amount: '4000',
-    },
-    {
-      recipient: 'Lewis Ndungu',
-      type: 'withdrawal',
-      amount: '4000',
-    },
-    {
-      recipient: 'Lewis Ndungu',
-      type: 'deposit',
-      amount: '4000',
-    },
-    {
-      recipient: 'Lewis Ndungu',
-      type: 'deposit',
-      amount: '4000',
-    },
-    {
-      recipient: 'Lewis Ndungu',
-      type: 'deposit',
-      amount: '4000',
-    },
-  ];
+  dataSource!: MatTableDataSource<Transaction>;
 
-  columnsToDisplay = ['recipient', 'type', 'amount'];
+  columnsToDisplay = ['account', 'type', 'amount'];
 
-  constructor() {}
+  constructor(private transactionsService: TransactionsService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.transactionsService.transactions.subscribe((transactions) => {
+      this.dataSource = new MatTableDataSource(transactions);
+    });
+  }
 }
