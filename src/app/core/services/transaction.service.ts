@@ -65,4 +65,8 @@ export class TransactionsService {
   get transactions() {
     return of(transactions);
   }
+
+  getTransactionById(id: number | string): Transaction | undefined {
+    return transactions.find(transaction => transaction.id === id);
+  }
 }
