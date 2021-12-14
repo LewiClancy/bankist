@@ -1,0 +1,35 @@
+.transaction-list {
+  min-height: 77vh;
+  border: 1px solid lightgray;
+
+  &__title {
+    border-bottom: 1px solid lightgray;
+    padding: 0.5rem 1rem;
+
+    color: #fff;
+    background-color: var(--clr-accent);
+    border-bottom: 1px solid lightgray;
+
+    display: flex;
+    align-items: center;
+
+    h1 {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  &__content {
+  }
+}
+
+table {
+  width: 100%;
+}
+
+.link {
+  @apply hover:bg-gray-50 cursor-pointer transition-all;
+}
+
+.link-active {
+  @apply bg-gray-100;
+}
