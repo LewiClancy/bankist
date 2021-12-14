@@ -13,6 +13,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const MaterialComponents = [
   MatToolbarModule,
@@ -28,6 +30,8 @@ const MaterialComponents = [
   MatNativeDateModule,
   MatCardModule,
   MatTableModule,
+  MatSortModule,
+  MatPaginatorModule,
 ];
 @NgModule({
   imports: [MaterialComponents],
