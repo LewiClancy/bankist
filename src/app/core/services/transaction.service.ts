@@ -9,6 +9,7 @@ const transactions: Transaction[] = [
     kind: 'DEPOSIT',
     amount: 4000,
     date: new Date().getTime(),
+    message: 'First trial transaction',
   },
   {
     id: '2',
@@ -30,6 +31,7 @@ const transactions: Transaction[] = [
     kind: 'DEPOSIT',
     amount: 4000,
     date: new Date().getTime(),
+    message: 'I had to pay my bills',
   },
   {
     id: '5',
@@ -44,6 +46,7 @@ const transactions: Transaction[] = [
     kind: 'DEPOSIT',
     amount: 4000,
     date: new Date().getTime(),
+    message: 'Paid for my book',
   },
 ];
 
