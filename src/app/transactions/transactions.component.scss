@@ -1,0 +1,10 @@
+.transactions {
+  @apply container mx-auto;
+
+  display: flex;
+  justify-content: center;
+}
+
+.transactions-list {
+  flex: 0 1 50%;
+}
