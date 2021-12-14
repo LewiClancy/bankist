@@ -2,7 +2,7 @@ export interface Transaction {
   id: string;
   kind: 'WITHDRAWAL' | 'DEPOSIT';
   amount: number;
-  date: number;
+  date: Date;
   accountId: string;
   message?: string;
 }
