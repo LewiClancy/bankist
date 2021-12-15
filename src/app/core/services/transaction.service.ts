@@ -49,7 +49,7 @@ const transactions: Transaction[] = [
     message: 'Paid for my book',
   },
   {
-    id: '6',
+    id: '7',
     accountId: 'Thomas shelby',
     kind: 'DEPOSIT',
     amount: 7000,
