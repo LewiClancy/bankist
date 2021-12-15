@@ -24,9 +24,12 @@ export class TransactionDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.getTransaction();
+  }
+
+  getTransaction() {
     this.transaction$ = this.route.data.pipe(
       map(data => data['transaction']),
-      tap(transaction => console.log(transaction)),
       tap(transaction => {
         this.detailForm.patchValue({
           id: transaction.id,

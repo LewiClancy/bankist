@@ -1,7 +1,13 @@
 <section class="transaction-list" role="region">
   <header class="transaction-list__title">
     <h1 class="mb-0" id="transaction-header">Transactions</h1>
-    <input type="search" name="" id="" placeholder="Search for a transaction" />
+    <input
+      type="search"
+      name=""
+      id=""
+      placeholder="Search for a transaction"
+      [formControl]="filterControl"
+    />
   </header>
 
   <div class="transaction-list__content" aria-labelledby="transaction-header">
