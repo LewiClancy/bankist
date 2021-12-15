@@ -12,13 +12,28 @@
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
     h1 {
       margin-bottom: 0 !important;
     }
-  }
 
-  &__content {
+    input {
+      padding-inline: 0.5rem;
+      height: 2rem;
+      width: 15rem;
+      border-radius: 2px;
+      @apply text-black focus:outline-none transition-all;
+    }
+
+    input:focus {
+      padding-inline: 1rem;
+      width: 20rem;
+
+      &::-webkit-input-placeholder {
+        color: rgb(109, 109, 109);
+      }
+    }
   }
 }
 

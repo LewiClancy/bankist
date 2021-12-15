@@ -1,9 +1,10 @@
 <section class="transaction-list" role="region">
   <header class="transaction-list__title">
-    <h1 class="mb-0">Transactions</h1>
+    <h1 class="mb-0" id="transaction-header">Transactions</h1>
+    <input type="search" name="" id="" placeholder="Search for a transaction" />
   </header>
 
-  <div class="transaction-list__content">
+  <div class="transaction-list__content" aria-labelledby="transaction-header">
     <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>
