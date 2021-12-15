@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map, Observable, tap } from 'rxjs';
 import { Transaction } from 'src/app/core/models';
 
@@ -21,7 +21,11 @@ export class TransactionDetailsComponent implements OnInit {
     message: [''],
   });
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getTransaction();
@@ -45,5 +49,9 @@ export class TransactionDetailsComponent implements OnInit {
 
   transformDate(date: Date) {
     return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+  }
+
+  handleClose() {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 }
