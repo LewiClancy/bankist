@@ -2,11 +2,16 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-transactions-start',
-  template: ` <p>transactions-start works!</p> `,
+  template: `
+    <h3>
+      Please select a transaction to<br />
+      view details.
+    </h3>
+  `,
   styles: [
     `
       :host {
-        flex: 0 1 auto;
+        flex: 0 1 30%;
       }
     `,
   ],

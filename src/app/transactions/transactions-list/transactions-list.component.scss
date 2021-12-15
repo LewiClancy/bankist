@@ -1,5 +1,5 @@
 .transaction-list {
-  min-height: 77vh;
+  min-height: 80vh;
   border: 1px solid lightgray;
 
   &__title {
@@ -27,9 +27,13 @@ table {
 }
 
 .link {
-  @apply hover:bg-gray-50 cursor-pointer transition-all;
+  @apply transition-all;
+}
+
+.link:hover {
+  @apply bg-gray-100 cursor-pointer;
 }
 
 .link-active {
-  @apply bg-gray-100;
+  @apply bg-gray-200;
 }

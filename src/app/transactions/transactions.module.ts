@@ -7,6 +7,7 @@ import { TransactionDetailsComponent } from './transaction-details/transaction-d
 import { TransactionsStartComponent } from './transactions-start/transactions-start.component';
 import { TransactionsListComponent } from './transactions-list/transactions-list.component';
 import { SharedModule } from '../shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,11 @@ import { SharedModule } from '../shared/shared.module';
     TransactionsStartComponent,
     TransactionsListComponent,
   ],
-  imports: [CommonModule, SharedModule, TransactionsRoutingModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    TransactionsRoutingModule,
+    ReactiveFormsModule,
+  ],
 })
 export class TransactionsModule {}

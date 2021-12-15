@@ -17,7 +17,6 @@ export class TransactionResolver implements Resolve<Transaction | undefined> {
     if (!transId) return undefined;
 
     const transaction = this.transactionsService.getTransactionById(transId);
-    console.log(transaction);
 
     if (transaction) {
       return transaction;
@@ -26,8 +25,5 @@ export class TransactionResolver implements Resolve<Transaction | undefined> {
     }
   }
 
-  constructor(
-    private transactionsService: TransactionsService,
-    private router: Router
-  ) {}
+  constructor(private transactionsService: TransactionsService) {}
 }
