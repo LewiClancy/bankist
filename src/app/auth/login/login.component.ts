@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { login } from '../store/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,11 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   passwordType: 'password' | 'text' = 'password';
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private store: Store
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -21,7 +27,12 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   handleLogin() {
-    console.log(this.loginForm.value);
+    this.store.dispatch(
+      login({
+        email: this.loginForm.value['email'],
+        password: this.loginForm.value['password'],
+      })
+    );
   }
 
   switchToSignup() {
