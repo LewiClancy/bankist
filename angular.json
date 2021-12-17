@@ -109,5 +109,8 @@
       }
     }
   },
-  "defaultProject": "bankist"
+  "defaultProject": "bankist",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
