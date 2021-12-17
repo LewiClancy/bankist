@@ -1,24 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import {
-  catchError,
-  EMPTY,
-  exhaustMap,
-  from,
-  map,
-  of,
-  switchMap,
-  tap,
-} from 'rxjs';
-import { SnackbarService } from 'src/app/core/services/snackbar.service';
-import { AuthService } from '../auth.service';
+import { catchError, EMPTY, exhaustMap, from, of, switchMap } from 'rxjs';
 import {
   login,
   logout,
   successfulLogin,
   unsuccessfulLogin,
 } from './auth.actions';
+import { SnackbarService } from 'src/app/core/services/snackbar.service';
+import { AuthService } from '../auth.service';
 
 @Injectable()
 export class AuthEffects {
@@ -37,7 +28,6 @@ export class AuthEffects {
           this.authService.handleLogin(action.email, action.password)
         ).pipe(
           switchMap(() => {
-            console.log('in then');
             return of(successfulLogin());
           }),
           catchError(err => {
@@ -54,7 +44,7 @@ export class AuthEffects {
         ofType(successfulLogin),
         exhaustMap(() => {
           console.log('Login successful');
-          return of(() => EMPTY);
+          return of(() => EMPTY); //TODO add login functionality
         })
       );
     },
@@ -77,4 +67,6 @@ export class AuthEffects {
     },
     { dispatch: false }
   );
+
+  //TODO Add logout functionality
 }
