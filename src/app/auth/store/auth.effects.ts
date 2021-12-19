@@ -22,8 +22,11 @@ export class AuthEffects {
         return from(
           this.authService.handleLogin(action.email, action.password)
         ).pipe(
-          switchMap(() => {
-            return of(authActions.successfulLogin());
+          switchMap(user => {
+            console.log(user.user?.uid, user.user?.email);
+            const uid = user.user?.uid;
+            const email = user.user?.email;
+            return of(authActions.successfulLogin({ uid, email }));
           }),
           catchError(err => {
             return of(
@@ -40,7 +43,7 @@ export class AuthEffects {
       return this.actions$.pipe(
         ofType(authActions.successfulLogin),
         exhaustMap(() => {
-          console.log('Login successful');
+          console.log('Login Successful');
           return of(() => EMPTY); //TODO add login functionality
         })
       );

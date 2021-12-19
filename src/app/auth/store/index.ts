@@ -1,19 +1,38 @@
 import {
+  Action,
   ActionReducer,
   ActionReducerMap,
   createFeatureSelector,
   createReducer,
   createSelector,
   MetaReducer,
+  on,
+  props,
 } from '@ngrx/store';
 import { Transaction } from 'src/app/core/models';
 import { AccountOwner } from 'src/app/core/models';
 import { Account } from '../../core/models';
+import * as authActions from './auth.actions';
 
 export const authFeatureKey = 'auth';
 
-export interface State {}
+export interface AuthState {
+  uid: string | undefined;
+  email: string | undefined | null;
+}
 
-export const initialState: State = {};
+export const initialState: AuthState = {
+  uid: undefined,
+  email: undefined,
+};
 
-export const reducers: ActionReducerMap<State> = {};
+export const reducer = createReducer(
+  initialState,
+  on(authActions.successfulLogin, (state: AuthState, { email, uid }) => {
+    return {
+      ...state,
+      uid,
+      email,
+    };
+  })
+);

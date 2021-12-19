@@ -16,7 +16,7 @@ import { EffectsModule } from '@ngrx/effects';
     SharedModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.reducers),
+    StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.reducer),
     EffectsModule.forFeature([AuthEffects]),
   ],
   declarations: [LoginComponent, SignupComponent, AuthComponent],
