@@ -3,6 +3,8 @@
     class="mat-display-1"
     src="../../../assets/images/logo.png"
     alt="Bankist logo"
+    height="106px"
+    width="106px"
   />
   <h1>Login into your bankist account.</h1>
 </header>
@@ -19,10 +21,11 @@
       formControlName="email"
     />
   </mat-form-field>
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" hintLabel="Min 6 charachters">
     <mat-label>Enter your password</mat-label>
     <span matPrefix> <mat-icon color="primary">lock</mat-icon> </span>
     <input
+      #password
       matInput
       [type]="passwordType"
       formControlName="password"
@@ -38,8 +41,9 @@
         {{ passwordType === 'password' ? 'visibility_off' : 'visibility' }}
       </mat-icon>
     </button>
+    <mat-hint align="end">{{ password.value?.length }} / 6</mat-hint>
   </mat-form-field>
-  <div class="actions">
+  <div class="actions mt-3">
     <button
       type="submit"
       mat-raised-button
