@@ -12,7 +12,6 @@ export class AuthGuard implements CanLoad {
       if (isLoggedIn) {
         this.returnType = true;
       } else {
-        console.log('here');
         this.returnType = router.createUrlTree(['/auth', 'login']);
       }
     });
