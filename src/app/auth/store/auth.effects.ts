@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
 import { catchError, EMPTY, exhaustMap, from, of, switchMap } from 'rxjs';
-import * as authActions from './auth.actions'; // TODO reformat this import
+import * as authActions from './auth.actions';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
@@ -81,6 +80,4 @@ export class AuthEffects {
     },
     { dispatch: false }
   );
-
-  //TODO Add logout functionality
 }
