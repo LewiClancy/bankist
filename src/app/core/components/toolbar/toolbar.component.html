@@ -4,9 +4,20 @@
       <a routerLink="/">Bankist</a>
     </div>
     <div class="hidden md:flex items-stretch gap-2 h-full">
-      <nav-link-item [link]="['/auth', 'login']" matRipple>Login</nav-link-item>
-      <nav-link-item [link]="['/auth', 'signup']" matRipple
+      <nav-link-item
+        *ngIf="!(isLoggedIn$ | async)"
+        [link]="['/auth', 'login']"
+        matRipple
+        >Login</nav-link-item
+      >
+      <nav-link-item
+        *ngIf="!(isLoggedIn$ | async)"
+        [link]="['/auth', 'signup']"
+        matRipple
         >Signup</nav-link-item
+      >
+      <nav-link-item *ngIf="isLoggedIn$ | async" matRipple (click)="onSignOut()"
+        >Sign Out</nav-link-item
       >
     </div>
     <div class="md:hidden">

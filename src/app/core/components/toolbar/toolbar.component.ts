@@ -1,4 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { signOut } from 'src/app/auth/store/auth.actions';
+import { selectIsLoggedIn } from 'src/app/auth/store/auth.selectors';
 
 @Component({
   selector: 'app-toolbar',
@@ -6,9 +10,17 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./toolbar.component.scss'],
 })
 export class ToolbarComponent implements OnInit {
+  isLoggedIn$!: Observable<boolean>;
+
   @Output() toggleSidenav = new EventEmitter();
 
-  constructor() {}
+  constructor(private store: Store) {
+    this.isLoggedIn$ = this.store.select(selectIsLoggedIn);
+  }
 
   ngOnInit(): void {}
+
+  onSignOut() {
+    this.store.dispatch(signOut());
+  }
 }
