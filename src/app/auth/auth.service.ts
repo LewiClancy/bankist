@@ -23,10 +23,7 @@ export class AuthService {
       if (user) {
         let email = user.email;
         let uid = user.uid;
-
         this.store.dispatch(successfulLogin({ uid, email }));
-      } else {
-        this.store.dispatch(signOut());
       }
     });
   }
