@@ -5,14 +5,15 @@ import { catchError, EMPTY, exhaustMap, from, of, switchMap } from 'rxjs';
 import * as authActions from './auth.actions'; // TODO reformat this import
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthEffects {
   constructor(
+    private router: Router,
     private actions$: Actions,
     private authService: AuthService,
-    private snackbarService: SnackbarService,
-    private store: Store
+    private snackbarService: SnackbarService
   ) {}
 
   login$ = createEffect(() => {
@@ -43,7 +44,7 @@ export class AuthEffects {
       return this.actions$.pipe(
         ofType(authActions.successfulLogin),
         exhaustMap(() => {
-          console.log('Login Successful');
+          this.router.navigateByUrl('/dashboard');
           return of(() => EMPTY); //TODO add login functionality
         })
       );
@@ -61,6 +62,19 @@ export class AuthEffects {
             action.errorMessage,
             'I understand'
           );
+          return of(() => EMPTY);
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  signOut$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(authActions.signOut),
+        switchMap(() => {
+          this.authService.handleSignOut();
           return of(() => EMPTY);
         })
       );

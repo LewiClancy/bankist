@@ -18,4 +18,4 @@ export const unsuccessfulLogin = createAction(
   props<{ errorMessage: string }>()
 );
 
-export const logout = createAction('[Navigation Bar] Logout');
+export const signOut = createAction('[Navigation Bar] Sign Out');

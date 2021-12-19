@@ -1,3 +1,4 @@
+import { state } from '@angular/animations';
 import {
   Action,
   ActionReducer,
@@ -34,5 +35,11 @@ export const reducer = createReducer(
       uid,
       email,
     };
-  })
+  }),
+
+  on(authActions.signOut, state => ({
+    ...state,
+    uid: undefined,
+    email: undefined,
+  }))
 );
