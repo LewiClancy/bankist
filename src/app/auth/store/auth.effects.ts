@@ -2,12 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, EMPTY, exhaustMap, from, of, switchMap } from 'rxjs';
-import {
-  login,
-  logout,
-  successfulLogin,
-  unsuccessfulLogin,
-} from './auth.actions';
+import * as authActions from './auth.actions'; // TODO reformat this import
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { AuthService } from '../auth.service';
 
@@ -22,16 +17,18 @@ export class AuthEffects {
 
   login$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(login),
+      ofType(authActions.login),
       exhaustMap(action => {
         return from(
           this.authService.handleLogin(action.email, action.password)
         ).pipe(
           switchMap(() => {
-            return of(successfulLogin());
+            return of(authActions.successfulLogin());
           }),
           catchError(err => {
-            return of(unsuccessfulLogin({ errorMessage: err.message }));
+            return of(
+              authActions.unsuccessfulLogin({ errorMessage: err.message })
+            );
           })
         );
       })
@@ -41,7 +38,7 @@ export class AuthEffects {
   successfulLogin$ = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(successfulLogin),
+        ofType(authActions.successfulLogin),
         exhaustMap(() => {
           console.log('Login successful');
           return of(() => EMPTY); //TODO add login functionality
@@ -54,7 +51,7 @@ export class AuthEffects {
   unsuccessfulLogin$ = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(unsuccessfulLogin),
+        ofType(authActions.unsuccessfulLogin),
         exhaustMap(action => {
           console.log('Login not successful');
           this.snackbarService.openSnackbar(
