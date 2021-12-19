@@ -15,35 +15,36 @@ export class AuthEffects {
     private snackbarService: SnackbarService
   ) {}
 
-  login$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(authActions.login),
-      exhaustMap(action => {
-        return from(
-          this.authService.handleLogin(action.email, action.password)
-        ).pipe(
-          switchMap(user => {
-            console.log(user.user?.uid, user.user?.email);
-            const uid = user.user?.uid;
-            const email = user.user?.email;
-            return of(authActions.successfulLogin({ uid, email }));
-          }),
-          catchError(err => {
-            return of(
-              authActions.unsuccessfulLogin({ errorMessage: err.message })
-            );
-          })
-        );
-      })
-    );
-  });
+  login$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(authActions.login),
+        exhaustMap(action => {
+          return from(
+            this.authService.handleLogin(action.email, action.password)
+          ).pipe(
+            switchMap(user => {
+              console.log('Login Successful');
+              return of(() => EMPTY);
+            }),
+            catchError(err => {
+              return of(
+                authActions.unsuccessfulLogin({ errorMessage: err.message })
+              );
+            })
+          );
+        })
+      );
+    },
+    { dispatch: false }
+  );
 
   successfulLogin$ = createEffect(
     () => {
       return this.actions$.pipe(
         ofType(authActions.successfulLogin),
         exhaustMap(() => {
-          this.router.navigateByUrl('/dashboard');
+          // this.router.navigateByUrl('/dashboard');
           return of(() => EMPTY); //TODO add login functionality
         })
       );
@@ -74,6 +75,7 @@ export class AuthEffects {
         ofType(authActions.signOut),
         switchMap(() => {
           this.authService.handleSignOut();
+          this.router.navigateByUrl('/auth/login');
           return of(() => EMPTY);
         })
       );
