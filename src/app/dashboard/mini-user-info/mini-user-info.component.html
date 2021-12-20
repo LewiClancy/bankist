@@ -1,10 +1,14 @@
 <section class="user__card">
   <div class="user__header"></div>
-  <figure class="user__content">
-    <img src="../../../assets/images/image-jeremy.png" alt="User logo" />
+  <figure class="user__content" aria-label="user-information">
+    <img [src]="ownerInfo?.photoUrl" alt="Your profile picture" />
     <figcaption class="text-lg text-center">
       Welcome back, <br />
-      <span class="uppercase">Lewis Ndungu</span>
+      <!-- TODO Add a service to display greeting -->
+      <span
+        >{{ ownerInfo?.firstName | titlecase }}
+        {{ ownerInfo?.surname | titlecase }}</span
+      >
     </figcaption>
   </figure>
   <a class="user__action" mat-stroked-button

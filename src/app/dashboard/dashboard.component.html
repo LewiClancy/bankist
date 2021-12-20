@@ -2,6 +2,7 @@
   <app-mini-user-info
     id="user-info"
     class="hidden md:block"
+    [ownerInfo]="accountOwnerInfo$ | async"
   ></app-mini-user-info>
 
   <app-mini-summary

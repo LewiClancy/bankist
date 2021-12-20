@@ -1,7 +1,7 @@
 export interface AccountOwner {
   id: string;
   firstName: string;
-  lastName: string;
+  surname: string;
   photoUrl: string;
   email: string;
 }
