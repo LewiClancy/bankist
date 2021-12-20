@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Transaction } from '../models';
 
 const transactions: Transaction[] = [
@@ -62,7 +62,7 @@ const transactions: Transaction[] = [
 export class TransactionsService {
   constructor() {}
 
-  get transactions() {
+  get transactions(): Observable<Transaction[]> {
     return of(transactions);
   }
 

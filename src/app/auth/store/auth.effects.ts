@@ -44,7 +44,7 @@ export class AuthEffects {
       return this.actions$.pipe(
         ofType(authActions.successfulLogin),
         exhaustMap(() => {
-          // this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('/dashboard');
           return of(() => EMPTY); //TODO add login functionality
         })
       );
