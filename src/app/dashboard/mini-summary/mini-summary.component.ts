@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Account } from 'src/app/core/models';
 
 @Component({
   selector: 'app-mini-summary',
   templateUrl: './mini-summary.component.html',
-  styleUrls: ['./mini-summary.component.scss']
+  styleUrls: ['./mini-summary.component.scss'],
 })
 export class MiniSummaryComponent implements OnInit {
+  @Input() accountInfo: Partial<Account> | null = {};
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

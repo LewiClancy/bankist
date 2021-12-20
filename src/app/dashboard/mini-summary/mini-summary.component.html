@@ -7,11 +7,11 @@
     aria-labelledby="summary"
   >
     <p class="text-black">Account Id</p>
-    <p class="">adFSeefJJll63456</p>
+    <p class="">{{ accountInfo?.id }}</p>
     <p class="text-black">Account balance</p>
-    <p class="">$10000</p>
+    <p class="">{{ accountInfo?.float | currency }}</p>
     <p class="text-black">Account status</p>
-    <p class="">Good</p>
+    <p class="">{{ accountInfo?.status | titlecase }}</p>
   </div>
   <a mat-stroked-button class="summary__action">
     <span>View account Summary</span>

@@ -4,7 +4,11 @@
     class="hidden md:block"
   ></app-mini-user-info>
 
-  <app-mini-summary id="summary" class="w-full"></app-mini-summary>
+  <app-mini-summary
+    id="summary"
+    class="w-full"
+    [accountInfo]="accountInfo$ | async"
+  ></app-mini-summary>
 
   <div id="links" class="">
     <a mat-stroked-button class=""
