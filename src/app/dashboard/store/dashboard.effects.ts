@@ -1,17 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import {
-  catchError,
-  combineLatest,
-  EMPTY,
-  map,
-  of,
-  switchMap,
-  tap,
-  throwError,
-} from 'rxjs';
-import { selectUid } from 'src/app/auth/store/auth.selectors';
+import { catchError, combineLatest, of, switchMap } from 'rxjs';
+import { selectUserUid } from 'src/app/auth/store/auth.selectors';
 import { AccountOwner } from 'src/app/core/models';
 import { AppState } from 'src/app/store';
 import { DashboardService } from '../dashboard.service';
@@ -20,16 +11,10 @@ import * as dashboardActions from './dashboard.actions';
 
 @Injectable()
 export class DashboardEffects {
-  constructor(
-    private dsService: DashboardService,
-    private actions$: Actions,
-    private store: Store<AppState>
-  ) {}
-
   LoadAccountOwner$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(dashboardActions.loadAccountOwner),
-      concatLatestFrom(() => this.store.select(selectUid)),
+      concatLatestFrom(() => this.store.select(selectUserUid)),
       switchMap(([action, accountOwnerId]) => {
         if (!accountOwnerId) {
           return of(dashboardActions.loadAccountOwnerFailed());
@@ -100,4 +85,10 @@ export class DashboardEffects {
       })
     );
   });
+
+  constructor(
+    private dsService: DashboardService,
+    private actions$: Actions,
+    private store: Store<AppState>
+  ) {}
 }

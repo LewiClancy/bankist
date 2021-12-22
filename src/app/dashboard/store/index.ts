@@ -1,12 +1,4 @@
-import {
-  ActionReducer,
-  ActionReducerMap,
-  createFeatureSelector,
-  createReducer,
-  createSelector,
-  MetaReducer,
-  on,
-} from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 
 import { Account, AccountOwner, Transaction } from 'src/app/core/models';
 import * as dashboardActions from './dashboard.actions';

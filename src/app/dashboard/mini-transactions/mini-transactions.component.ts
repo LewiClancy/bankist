@@ -26,6 +26,8 @@ export class MiniTransactionsComponent implements OnInit, DoCheck {
   ngOnInit(): void {}
 
   ngDoCheck(): void {
+    console.log('docheck');
+
     this.dataSource = new MatTableDataSource(this.transactions ?? []); //check for undefined and null
   }
 

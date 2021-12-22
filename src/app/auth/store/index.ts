@@ -1,18 +1,4 @@
-import { state } from '@angular/animations';
-import {
-  Action,
-  ActionReducer,
-  ActionReducerMap,
-  createFeatureSelector,
-  createReducer,
-  createSelector,
-  MetaReducer,
-  on,
-  props,
-} from '@ngrx/store';
-import { Transaction } from 'src/app/core/models';
-import { AccountOwner } from 'src/app/core/models';
-import { Account } from '../../core/models';
+import { createReducer, on } from '@ngrx/store';
 import * as authActions from './auth.actions';
 
 export const authFeatureKey = 'auth';

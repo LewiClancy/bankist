@@ -24,8 +24,7 @@ export class AuthEffects {
           return from(
             this.authService.handleLogin(action.email, action.password)
           ).pipe(
-            switchMap(user => {
-              console.log('Login Successful');
+            switchMap(() => {
               return of(() => EMPTY);
             }),
             catchError(err => {
