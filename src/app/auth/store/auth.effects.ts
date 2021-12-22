@@ -5,7 +5,6 @@ import * as authActions from './auth.actions';
 import { SnackbarService } from 'src/app/core/services/snackbar.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { loadAccountOwner } from 'src/app/dashboard/store/dashboard.actions';
 
 @Injectable()
 export class AuthEffects {
