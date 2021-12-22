@@ -1,8 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { catchError, EMPTY, map, of, switchMap, tap, throwError } from 'rxjs';
+import {
+  catchError,
+  combineLatest,
+  EMPTY,
+  map,
+  of,
+  switchMap,
+  tap,
+  throwError,
+} from 'rxjs';
 import { selectUid } from 'src/app/auth/store/auth.selectors';
+import { AccountOwner } from 'src/app/core/models';
 import { AppState } from 'src/app/store';
 import { DashboardService } from '../dashboard.service';
 
@@ -20,20 +30,34 @@ export class DashboardEffects {
     return this.actions$.pipe(
       ofType(dashboardActions.loadAccountOwner),
       concatLatestFrom(() => this.store.select(selectUid)),
-      switchMap(([_, accountOwnerId]) => {
+      switchMap(([action, accountOwnerId]) => {
         if (!accountOwnerId) {
           return of(dashboardActions.loadAccountOwnerFailed());
         }
 
-        return this.dsService.loadAccountOwner(accountOwnerId).pipe(
-          switchMap(accountOwner =>
-            of(
+        const accOwnerInfo$ = this.dsService.loadAccountOwner(accountOwnerId);
+
+        const accOwnerDisplayImage$ =
+          this.dsService.loadUserProfileImage(accountOwnerId);
+
+        const accountOwner$ = combineLatest([
+          accOwnerInfo$,
+          accOwnerDisplayImage$,
+        ]);
+
+        return accountOwner$.pipe(
+          switchMap(([accOwnerinfo, displayImage]) => {
+            let accountOwner: AccountOwner = {
+              ...accOwnerinfo,
+              displayImage,
+            };
+            return of(
               dashboardActions.loadAccountOwnerSuccessful({ accountOwner }),
               dashboardActions.loadAccountInfo({
                 accountId: accountOwner.accountId,
               })
-            )
-          ),
+            );
+          }),
           catchError(() => of(dashboardActions.loadAccountOwnerFailed()))
         );
       })

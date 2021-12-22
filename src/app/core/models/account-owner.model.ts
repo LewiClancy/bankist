@@ -2,7 +2,7 @@ export interface AccountOwner {
   id: string;
   firstName: string;
   surname: string;
-  photoUrl: string;
+  displayImage: string;
   email: string;
   accountId: string;
   dateOfBirth: {

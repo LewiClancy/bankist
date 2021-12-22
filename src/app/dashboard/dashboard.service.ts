@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { Account, AccountOwner, Transaction } from '../core/models';
 import { convertSnaps } from '../core/services';
 
 @Injectable({ providedIn: 'root' })
 export class DashboardService {
-  constructor(private afs: AngularFirestore) {}
+  constructor(
+    private afs: AngularFirestore,
+    private afStorage: AngularFireStorage
+  ) {}
 
   loadAccountOwner(ownerId: string) {
     return this.afs
@@ -37,5 +42,13 @@ export class DashboardService {
       .collection<Transaction>(`accounts/${accountId}/transactions`)
       .valueChanges()
       .pipe(tap(transactions => console.log(transactions)));
+  }
+
+  loadUserProfileImage(accountId: string): Observable<string> {
+    console.log('getting image...');
+    console.log(accountId);
+    return this.afStorage
+      .ref(`display-images/${accountId}.png`)
+      .getDownloadURL();
   }
 }
