@@ -40,13 +40,10 @@ export class DashboardService {
   loadAccountTransactions(accountId: string) {
     return this.afs
       .collection<Transaction>(`accounts/${accountId}/transactions`)
-      .valueChanges()
-      .pipe(tap(transactions => console.log(transactions)));
+      .valueChanges();
   }
 
   loadUserProfileImage(accountId: string): Observable<string> {
-    console.log('getting image...');
-    console.log(accountId);
     return this.afStorage
       .ref(`display-images/${accountId}.png`)
       .getDownloadURL();

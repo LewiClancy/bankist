@@ -7,7 +7,7 @@ import { AccountOwner } from 'src/app/core/models';
   styleUrls: ['./mini-user-info.component.scss'], //TODO change the change detection strategy
 })
 export class MiniUserInfoComponent implements OnInit {
-  @Input() ownerInfo: Partial<AccountOwner> | null = {};
+  @Input() ownerInfo: Partial<AccountOwner | null | undefined> = {};
 
   constructor() {}
 

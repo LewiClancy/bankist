@@ -7,7 +7,7 @@ import { Account } from 'src/app/core/models';
   styleUrls: ['./mini-summary.component.scss'],
 })
 export class MiniSummaryComponent implements OnInit {
-  @Input() accountInfo: Partial<Account> | null = {};
+  @Input() accountInfo: Partial<Account | undefined | null> = {};
 
   constructor() {}
 

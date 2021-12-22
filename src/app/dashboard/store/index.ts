@@ -8,18 +8,18 @@ import {
   on,
 } from '@ngrx/store';
 
-import * as fromDashboard from './dashboard.actions';
 import { Account, AccountOwner, Transaction } from 'src/app/core/models';
+import * as dashboardActions from './dashboard.actions';
 
 export const dashboardFeatureKey = 'dashboard';
 
-export interface State {
+export interface DashboardState {
   accountOwner: AccountOwner | undefined;
   accountInfo: Account | undefined;
   transactions: Transaction[];
 }
 
-export const initialState: State = {
+export const initialState: DashboardState = {
   accountOwner: undefined,
   accountInfo: undefined,
   transactions: [],
@@ -28,20 +28,20 @@ export const initialState: State = {
 export const DashboardReducer = createReducer(
   initialState,
 
-  on(fromDashboard.loadAccountOwnerSuccessful, (state, { accountOwner }) => {
+  on(dashboardActions.loadAccountOwnerSuccessful, (state, { accountOwner }) => {
     return {
       ...state,
       accountOwner,
     };
   }),
 
-  on(fromDashboard.loadAccountInfoSuccess, (state, { accountInfo }) => ({
+  on(dashboardActions.loadAccountInfoSuccess, (state, { accountInfo }) => ({
     ...state,
     accountInfo,
   })),
 
   on(
-    fromDashboard.loadAccountTransactionsSuccess,
+    dashboardActions.loadAccountTransactionsSuccess,
     (state, { transactions }) => ({
       ...state,
       transactions,
