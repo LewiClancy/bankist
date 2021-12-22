@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, of, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Account, AccountOwner, Transaction } from '../core/models';
-import { TransactionsService } from '../core/services';
 import { AppState } from '../store';
 
 import * as dashboardEffects from './store/dashboard.actions';
