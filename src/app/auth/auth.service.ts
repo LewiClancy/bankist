@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Store } from '@ngrx/store';
-import { signOut, successfulLogin } from './store/auth.actions';
+
+import { successfulLogin } from './store/auth.actions';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
