@@ -4,4 +4,9 @@ export interface AccountOwner {
   surname: string;
   photoUrl: string;
   email: string;
+  accountId: string;
+  dateOfBirth: {
+    seconds: number;
+    nanoseconds: number;
+  };
 }
