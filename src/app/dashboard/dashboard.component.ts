@@ -5,6 +5,8 @@ import { Account, AccountOwner } from '../core/models';
 import { TransactionsService } from '../core/services';
 import { AppState } from '../store';
 
+import * as dashboardEffects from './store/dashboard.actions';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -30,5 +32,7 @@ export class DashboardComponent implements OnInit {
     private store: Store<AppState>
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.store.dispatch(dashboardEffects.loadAccountOwner());
+  }
 }

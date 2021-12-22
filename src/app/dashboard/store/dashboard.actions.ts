@@ -2,8 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { Account, AccountOwner } from 'src/app/core/models';
 
 export const loadAccountOwner = createAction(
-  '[Auth Effects] Load Account Owner Information',
-  props<{ accountOwnerId: string }>()
+  '[Auth Effects] Load Account Owner Information'
 );
 
 export const loadAccountOwnerSuccessful = createAction(

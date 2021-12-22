@@ -40,15 +40,18 @@ export class AuthEffects {
     { dispatch: false }
   );
 
-  successfulLogin$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(authActions.successfulLogin),
-      exhaustMap(user => {
-        this.router.navigateByUrl('/dashboard');
-        return of(loadAccountOwner({ accountOwnerId: user.uid }));
-      })
-    );
-  });
+  successfulLogin$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(authActions.successfulLogin),
+        exhaustMap(() => {
+          this.router.navigateByUrl('/dashboard');
+          return of(() => EMPTY);
+        })
+      );
+    },
+    { dispatch: false }
+  );
 
   unsuccessfulLogin$ = createEffect(
     () => {
