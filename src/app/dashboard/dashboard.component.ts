@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { Account, AccountOwner } from '../core/models';
 import { TransactionsService } from '../core/services';
+import { AppState } from '../store';
+import { DashboardService } from './dashboard.service';
+import { loadAccountOwner } from './store/dashboard.actions';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,7 +27,14 @@ export class DashboardComponent implements OnInit {
 
   transactions$ = this.transactionsService.transactions;
 
-  constructor(private transactionsService: TransactionsService) {}
+  constructor(
+    private transactionsService: TransactionsService,
+    private store: Store<AppState>
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.store.dispatch(
+      loadAccountOwner({ accountOwnerId: 'nhX2J9wgcKYmBE4Raojk8o2nUwi2' })
+    );
+  }
 }
