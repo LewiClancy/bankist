@@ -10,7 +10,7 @@ export const login = createAction(
 
 export const successfulLogin = createAction(
   '[Auth Effect] Login Successful',
-  props<{ uid: string | undefined; email: string | undefined | null }>()
+  props<{ uid: string; email: string | null }>()
 );
 
 export const unsuccessfulLogin = createAction(
