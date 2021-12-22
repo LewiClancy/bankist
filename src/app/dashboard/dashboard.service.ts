@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map, tap } from 'rxjs/operators';
-import { Account, AccountOwner } from '../core/models';
+import { Account, AccountOwner, Transaction } from '../core/models';
 import { convertSnaps } from '../core/services';
 
 @Injectable({ providedIn: 'root' })
@@ -30,5 +30,12 @@ export class DashboardService {
           return convertSnaps<Account>(accountSnapshot);
         })
       );
+  }
+
+  loadAccountTransactions(accountId: string) {
+    return this.afs
+      .collection<Transaction>(`accounts/${accountId}/transactions`)
+      .valueChanges()
+      .pipe(tap(transactions => console.log(transactions)));
   }
 }

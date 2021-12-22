@@ -6,7 +6,7 @@ import { selectUid } from 'src/app/auth/store/auth.selectors';
 import { AppState } from 'src/app/store';
 import { DashboardService } from '../dashboard.service';
 
-import * as dashboardEffects from './dashboard.actions';
+import * as dashboardActions from './dashboard.actions';
 
 @Injectable()
 export class DashboardEffects {
@@ -18,23 +18,23 @@ export class DashboardEffects {
 
   LoadAccountOwner$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(dashboardEffects.loadAccountOwner),
+      ofType(dashboardActions.loadAccountOwner),
       concatLatestFrom(() => this.store.select(selectUid)),
       switchMap(([_, accountOwnerId]) => {
         if (!accountOwnerId) {
-          return of(dashboardEffects.loadAccountOwnerFailed());
+          return of(dashboardActions.loadAccountOwnerFailed());
         }
 
         return this.dsService.loadAccountOwner(accountOwnerId).pipe(
           switchMap(accountOwner =>
             of(
-              dashboardEffects.loadAccountOwnerSuccessful({ accountOwner }),
-              dashboardEffects.loadAccountInfo({
+              dashboardActions.loadAccountOwnerSuccessful({ accountOwner }),
+              dashboardActions.loadAccountInfo({
                 accountId: accountOwner.accountId,
               })
             )
           ),
-          catchError(() => of(dashboardEffects.loadAccountOwnerFailed()))
+          catchError(() => of(dashboardActions.loadAccountOwnerFailed()))
         );
       })
     );
@@ -42,16 +42,36 @@ export class DashboardEffects {
 
   loadAccountInfo$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(dashboardEffects.loadAccountInfo),
+      ofType(dashboardActions.loadAccountInfo),
       switchMap(({ accountId }) => {
         return this.dsService.loadAccountInfo(accountId).pipe(
           switchMap(accountInfo => {
-            console.log(accountInfo);
-            return of(dashboardEffects.loadAccountInfoSuccess({ accountInfo }));
+            return of(
+              dashboardActions.loadAccountInfoSuccess({ accountInfo }),
+              dashboardActions.loadAccountTransactions({ accountId })
+            );
           }),
           catchError(() => {
-            return of(dashboardEffects.loadAccountInfoNotSuccess());
+            return of(dashboardActions.loadAccountInfoNotSuccess());
           })
+        );
+      })
+    );
+  });
+
+  loadAccountTransactions$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(dashboardActions.loadAccountTransactions),
+      switchMap(({ accountId }) => {
+        return this.dsService.loadAccountTransactions(accountId).pipe(
+          switchMap(transactions => {
+            return of(
+              dashboardActions.loadAccountTransactionsSuccess({
+                transactions,
+              })
+            );
+          }),
+          catchError(() => of(dashboardActions.loadAccountTransactionsFailed()))
         );
       })
     );

@@ -1,8 +1,8 @@
 import { createAction, props } from '@ngrx/store';
-import { Account, AccountOwner } from 'src/app/core/models';
+import { Account, AccountOwner, Transaction } from 'src/app/core/models';
 
 export const loadAccountOwner = createAction(
-  '[Auth Effects] Load Account Owner Information'
+  '[Dashboard Component] Load Account Owner Information'
 );
 
 export const loadAccountOwnerSuccessful = createAction(
@@ -24,6 +24,21 @@ export const loadAccountInfoSuccess = createAction(
   props<{ accountInfo: Account }>()
 );
 
+//TODO use entity for this
 export const loadAccountInfoNotSuccess = createAction(
   '[DashboardEffect] Account Info Loaded Successfully'
+);
+
+export const loadAccountTransactions = createAction(
+  '[Dashboard Effect] Load Account Transactions',
+  props<{ accountId: string }>()
+);
+
+export const loadAccountTransactionsSuccess = createAction(
+  '[Dashboard Effect] Load Account Transactions Successful',
+  props<{ transactions: Transaction[] }>()
+);
+
+export const loadAccountTransactionsFailed = createAction(
+  '[Dashboard Effect] Load Account Transactions Failed'
 );
