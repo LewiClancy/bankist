@@ -7,17 +7,17 @@ import { AuthComponent } from './auth.component';
 import { RouterModule } from '@angular/router';
 import { routes } from './routes';
 import { StoreModule } from '@ngrx/store';
-import * as fromAuth from './store';
 import { AuthEffects } from './store/auth.effects';
 import { EffectsModule } from '@ngrx/effects';
+import * as fromAuth from './store';
 
 @NgModule({
   imports: [
     SharedModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.reducer),
     EffectsModule.forFeature([AuthEffects]),
+    StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.authReducer),
   ],
   declarations: [LoginComponent, SignupComponent, AuthComponent],
 })

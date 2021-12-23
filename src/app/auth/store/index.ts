@@ -4,16 +4,16 @@ import * as authActions from './auth.actions';
 export const authFeatureKey = 'auth';
 
 export interface AuthState {
-  uid: string | undefined;
-  email: string | undefined | null;
+  uid: string | null;
+  email: string | null;
 }
 
 export const initialState: AuthState = {
-  uid: undefined,
-  email: undefined,
+  uid: null,
+  email: null,
 };
 
-export const reducer = createReducer(
+export const authReducer = createReducer(
   initialState,
   on(authActions.successfulLogin, (state: AuthState, { email, uid }) => {
     return {
@@ -25,7 +25,7 @@ export const reducer = createReducer(
 
   on(authActions.signOut, state => ({
     ...state,
-    uid: undefined,
-    email: undefined,
+    uid: '',
+    email: '',
   }))
 );

@@ -5,6 +5,7 @@ import { catchError, combineLatest, of, switchMap } from 'rxjs';
 import { selectUserUid } from 'src/app/auth/store/auth.selectors';
 import { AccountOwner } from 'src/app/core/models';
 import { AppState } from 'src/app/store';
+import { startLoading, stopLoading } from 'src/app/store/app-state.actions';
 import { DashboardService } from '../dashboard.service';
 
 import * as dashboardActions from './dashboard.actions';
@@ -16,6 +17,7 @@ export class DashboardEffects {
       ofType(dashboardActions.loadAccountOwner),
       concatLatestFrom(() => this.store.select(selectUserUid)),
       switchMap(([action, accountOwnerId]) => {
+        this.store.dispatch(startLoading());
         if (!accountOwnerId) {
           return of(dashboardActions.loadAccountOwnerFailed());
         }
@@ -74,6 +76,7 @@ export class DashboardEffects {
       switchMap(({ accountId }) => {
         return this.dsService.loadAccountTransactions(accountId).pipe(
           switchMap(transactions => {
+            this.store.dispatch(stopLoading());
             return of(
               dashboardActions.loadAccountTransactionsSuccess({
                 transactions,

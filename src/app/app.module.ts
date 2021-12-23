@@ -12,16 +12,23 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { StoreModule } from '@ngrx/store';
-import { reducers } from './store';
+import * as fromAppState from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { ErrorPageComponent } from './shared/components/error-page/error-page.component';
 import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
 import { AlertComponent } from './shared/components/alert/alert.component';
+import { ProgressBarComponent } from './shared/components/progress-bar/progress-bar.component';
 
 @NgModule({
-  declarations: [AppComponent, ErrorPageComponent, LoadingSpinnerComponent, AlertComponent],
+  declarations: [
+    AppComponent,
+    ErrorPageComponent,
+    LoadingSpinnerComponent,
+    AlertComponent,
+    ProgressBarComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -33,7 +40,9 @@ import { AlertComponent } from './shared/components/alert/alert.component';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot({
+      [fromAppState.appStateKey]: fromAppState.appReducer,
+    }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([]),
   ],

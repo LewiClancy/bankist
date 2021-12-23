@@ -12,3 +12,10 @@ mat-sidenav-content {
 mat-sidenav {
   width: 17rem;
 }
+
+app-progress-bar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 5;
+}

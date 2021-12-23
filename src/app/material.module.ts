@@ -16,6 +16,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const MaterialComponents = [
   MatToolbarModule,
@@ -34,6 +35,7 @@ const MaterialComponents = [
   MatSortModule,
   MatPaginatorModule,
   MatSnackBarModule,
+  MatProgressBarModule,
 ];
 @NgModule({
   imports: [MaterialComponents],

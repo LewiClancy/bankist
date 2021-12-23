@@ -1,12 +1,18 @@
-import {
-  ActionReducer,
-  ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
-  MetaReducer,
-} from '@ngrx/store';
-import { environment } from '../../environments/environment';
+import { createReducer, on } from '@ngrx/store';
 
-export interface AppState {}
+import * as appActions from './app-state.actions';
 
-export const reducers: ActionReducerMap<AppState> = {};
+export const appStateKey = 'app';
+export interface AppState {
+  loading: boolean;
+}
+
+export const initialState: AppState = {
+  loading: false,
+};
+
+export const appReducer = createReducer(
+  initialState,
+  on(appActions.startLoading, state => ({ ...state, loading: true })),
+  on(appActions.stopLoading, state => ({ ...state, loading: false }))
+);
