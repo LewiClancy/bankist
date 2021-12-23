@@ -16,9 +16,12 @@ import { reducers } from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
+import { ErrorPageComponent } from './shared/components/error-page/error-page.component';
+import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
+import { AlertComponent } from './shared/components/alert/alert.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ErrorPageComponent, LoadingSpinnerComponent, AlertComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
