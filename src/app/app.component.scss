@@ -19,3 +19,10 @@ app-progress-bar {
   width: 100%;
   z-index: 5;
 }
+
+app-alert {
+  height: 40px;
+  width: 100%;
+  position: fixed;
+  top: var(--margin-top);
+}

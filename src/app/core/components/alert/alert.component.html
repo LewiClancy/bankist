@@ -1,1 +1,11 @@
-<p>alert works!</p>
+<div
+  [ngClass]="getClass()"
+  role="banner"
+  aria-describedat="errorMessage"
+  class="flex justify-between items-center md:px-2 lg:px-4"
+>
+  <p class="no-mb md:text-lg" id="errorMessage">{{ message }}</p>
+  <button mat-icon-button aria-label="Dismiss alert" (click)="onDismissAlert()">
+    <mat-icon aria-hidden="true"> close </mat-icon>
+  </button>
+</div>
