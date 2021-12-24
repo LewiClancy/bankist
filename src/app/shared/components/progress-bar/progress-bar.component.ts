@@ -12,7 +12,6 @@ import { selectIsLoading } from 'src/app/store/app-state.selectors';
       *ngIf="isLoading$ | async"
     ></mat-progress-bar>
   `,
-  styles: [``],
 })
 export class ProgressBarComponent implements OnInit {
   isLoading$!: Observable<boolean>;

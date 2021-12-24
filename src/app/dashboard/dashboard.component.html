@@ -1,4 +1,4 @@
-<div class="container mx-auto" id="dashboard">
+<main class="container mx-auto" id="dashboard" *ngIf="!(isLoading$ | async)">
   <app-mini-user-info
     id="user-info"
     class="hidden md:block"
@@ -26,4 +26,8 @@
     class="w-full"
     [transactions]="transactions$ | async"
   ></app-mini-transactions>
-</div>
+</main>
+
+<section *ngIf="isLoading$ | async" class="loading">
+  <app-loading-page></app-loading-page>
+</section>

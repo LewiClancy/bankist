@@ -4,13 +4,13 @@ import * as authActions from './auth.actions';
 export const authFeatureKey = 'auth';
 
 export interface AuthState {
-  uid: string | null;
-  email: string | null;
+  uid: string | undefined;
+  email: string | null | undefined;
 }
 
 export const initialState: AuthState = {
-  uid: null,
-  email: null,
+  uid: undefined,
+  email: undefined,
 };
 
 export const authReducer = createReducer(

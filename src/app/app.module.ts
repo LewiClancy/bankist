@@ -20,6 +20,7 @@ import { ErrorPageComponent } from './shared/components/error-page/error-page.co
 import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
 import { AlertComponent } from './shared/components/alert/alert.component';
 import { ProgressBarComponent } from './shared/components/progress-bar/progress-bar.component';
+import { LoadingPageComponent } from './shared/components/loading-page/loading-page.component';
 
 @NgModule({
   declarations: [

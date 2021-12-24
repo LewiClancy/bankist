@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Account, AccountOwner, Transaction } from '../core/models';
 import { AppState } from '../store';
+import { selectIsLoading } from '../store/app-state.selectors';
 
 import * as dashboardEffects from './store/dashboard.actions';
 import * as dashboardSelectors from './store/dashboard.selectors';
@@ -31,10 +32,14 @@ export class DashboardComponent implements OnInit {
   // transactions$ = this.transactionsService.transactions;
   transactions$!: Observable<Transaction[]>;
 
+  isLoading$!: Observable<boolean>;
+
   constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.store.dispatch(dashboardEffects.loadAccountOwner());
+
+    this.isLoading$ = this.store.select(selectIsLoading);
 
     this.accountOwnerInfo$ = this.store.select(
       dashboardSelectors.selectAccountOwnerInfo
