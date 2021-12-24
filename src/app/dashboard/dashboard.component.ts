@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Account, AccountOwner, Transaction } from '../core/models';
 import { AppState } from '../store';
-import { selectIsLoading } from '../store/app-state.selectors';
+import { selectIsLoading } from '../store/selectors/loading.selectors';
 
 import * as dashboardEffects from './store/dashboard.actions';
 import * as dashboardSelectors from './store/dashboard.selectors';

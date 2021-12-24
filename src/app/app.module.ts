@@ -12,19 +12,17 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { StoreModule } from '@ngrx/store';
-import * as fromAppState from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
+import { reducers } from './store';
 
 const FirebaseUtilities = [
   AngularFireModule.initializeApp(environment.firebaseConfig),
   AngularFirestoreModule,
   AngularFireAuthModule,
   AngularFirestoreModule,
-  StoreModule.forRoot({
-    [fromAppState.appStateKey]: fromAppState.appReducer,
-  }),
+  StoreModule.forRoot(reducers),
   !environment.production ? StoreDevtoolsModule.instrument() : [],
   EffectsModule.forRoot([]),
 ];

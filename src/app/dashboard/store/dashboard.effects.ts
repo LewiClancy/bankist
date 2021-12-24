@@ -5,7 +5,10 @@ import { catchError, combineLatest, of, switchMap } from 'rxjs';
 import { selectUserUid } from 'src/app/auth/store/auth.selectors';
 import { AccountOwner } from 'src/app/core/models';
 import { AppState } from 'src/app/store';
-import { startLoading, stopLoading } from 'src/app/store/app-state.actions';
+import {
+  startLoading,
+  stopLoading,
+} from 'src/app/store/actions/loading.actions';
 import { DashboardService } from '../dashboard.service';
 
 import * as dashboardActions from './dashboard.actions';

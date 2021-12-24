@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/store';
-import { selectIsLoading } from 'src/app/store/app-state.selectors';
+import { selectIsLoading } from 'src/app/store/selectors/loading.selectors';
 
 @Component({
   selector: 'app-progress-bar',
