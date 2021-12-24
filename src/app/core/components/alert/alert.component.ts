@@ -1,4 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AppState } from 'src/app/store';
+import * as alertSelectors from 'src/app/store/selectors/alert.selectors';
+import * as alertActions from 'src/app/store/actions/alert.actions';
 
 @Component({
   selector: 'app-alert',
@@ -6,17 +11,17 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./alert.component.scss'],
 })
 export class AlertComponent implements OnInit {
-  @Input() message = 'Testing the alert component';
+  displayAlert$!: Observable<boolean>;
+  message$!: Observable<string | undefined>;
 
-  @Input() type: 'success' | 'warning' = 'success';
+  constructor(private store: Store<AppState>) {}
 
-  constructor() {}
+  ngOnInit(): void {
+    this.displayAlert$ = this.store.select(alertSelectors.selectHasAlert);
+    this.message$ = this.store.select(alertSelectors.selectAlertMessage);
+  }
 
-  ngOnInit(): void {}
-
-  onDismissAlert() {}
-
-  getClass() {
-    return this.type;
+  onDismissAlert() {
+    this.store.dispatch(alertActions.clearMesssage());
   }
 }

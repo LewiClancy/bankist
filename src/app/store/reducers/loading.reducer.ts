@@ -12,7 +12,7 @@ export const initialState: LoadingState = {
   loading: false,
 };
 
-export const loadingReducer = createReducer(
+export const reducer = createReducer(
   initialState,
   on(loadingActions.startLoading, state => ({ ...state, loading: true })),
   on(loadingActions.stopLoading, state => ({ ...state, loading: false }))
