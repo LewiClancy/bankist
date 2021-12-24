@@ -16,20 +16,20 @@ import * as fromAppState from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { ErrorPageComponent } from './shared/components/error-page/error-page.component';
-import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
-import { AlertComponent } from './shared/components/alert/alert.component';
-import { ProgressBarComponent } from './shared/components/progress-bar/progress-bar.component';
-import { LoadingPageComponent } from './shared/components/loading-page/loading-page.component';
 
+const FirebaseUtilities = [
+  AngularFireModule.initializeApp(environment.firebaseConfig),
+  AngularFirestoreModule,
+  AngularFireAuthModule,
+  AngularFirestoreModule,
+  StoreModule.forRoot({
+    [fromAppState.appStateKey]: fromAppState.appReducer,
+  }),
+  !environment.production ? StoreDevtoolsModule.instrument() : [],
+  EffectsModule.forRoot([]),
+];
 @NgModule({
-  declarations: [
-    AppComponent,
-    ErrorPageComponent,
-    LoadingSpinnerComponent,
-    AlertComponent,
-    ProgressBarComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -37,15 +37,7 @@ import { LoadingPageComponent } from './shared/components/loading-page/loading-p
     ReactiveFormsModule,
     CoreModule,
     SharedModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule,
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    StoreModule.forRoot({
-      [fromAppState.appStateKey]: fromAppState.appReducer,
-    }),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([]),
+    FirebaseUtilities,
   ],
   providers: [],
   bootstrap: [AppComponent],
