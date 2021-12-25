@@ -1,47 +1,54 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, EMPTY, exhaustMap, from, of, switchMap } from 'rxjs';
-import * as authActions from './auth.actions';
-import { SnackbarService } from 'src/app/core/services/snackbar.service';
-import { AuthService } from '../auth.service';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
+import { AppState } from 'src/app/store';
+import { Store } from '@ngrx/store';
+import * as authActions from './auth.actions';
+import { setErrorMessage } from 'src/app/store/actions/alert.actions';
+import * as loadingActions from '../../store/actions/loading.actions';
+import { getErrorMessage } from 'src/app/core/services';
+import { AuthService } from '../auth.service';
 
 @Injectable()
 export class AuthEffects {
-  constructor(
-    private router: Router,
-    private actions$: Actions,
-    private authService: AuthService,
-    private snackbarService: SnackbarService
-  ) {}
+  login$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(authActions.login),
+      exhaustMap(action => {
+        this.store.dispatch(loadingActions.startLoading());
+        return from(
+          this.authService.handleLogin(action.email, action.password)
+        ).pipe(
+          switchMap(() => {
+            this.store.dispatch(loadingActions.stopLoading());
+            return of(authActions.successfulLogin());
+          }),
+          catchError(error => {
+            this.store.dispatch(loadingActions.stopLoading());
+            return of(authActions.unsuccessfulLogin({ errorCode: error.code }));
+          })
+        );
+      })
+    );
+  });
 
-  login$ = createEffect(
+  successfulLogin$ = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(authActions.login),
-        exhaustMap(action => {
-          return from(
-            this.authService.handleLogin(action.email, action.password)
-          ).pipe(
-            switchMap(() => {
-              return of(() => EMPTY);
-            }),
-            catchError(err => {
-              return of(
-                authActions.unsuccessfulLogin({ errorMessage: err.message })
-              );
-            })
-          );
+        ofType(authActions.successfulLogin),
+        exhaustMap(() => {
+          return of(() => EMPTY);
         })
       );
     },
     { dispatch: false }
   );
 
-  successfulLogin$ = createEffect(
+  setAuthStatus$ = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(authActions.successfulLogin),
+        ofType(authActions.setAuthStatus),
         exhaustMap(() => {
           this.router.navigateByUrl('/dashboard');
           return of(() => EMPTY);
@@ -51,22 +58,15 @@ export class AuthEffects {
     { dispatch: false }
   );
 
-  unsuccessfulLogin$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(authActions.unsuccessfulLogin),
-        exhaustMap(action => {
-          console.log('Login not successful');
-          this.snackbarService.openSnackbar(
-            action.errorMessage,
-            'I understand'
-          );
-          return of(() => EMPTY);
-        })
-      );
-    },
-    { dispatch: false }
-  );
+  unsuccessfulLogin$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(authActions.unsuccessfulLogin),
+      switchMap(({ errorCode }) => {
+        console.log(errorCode);
+        return of(setErrorMessage({ message: getErrorMessage(errorCode) }));
+      })
+    );
+  });
 
   signOut$ = createEffect(
     () => {
@@ -81,4 +81,11 @@ export class AuthEffects {
     },
     { dispatch: false }
   );
+
+  constructor(
+    private router: Router,
+    private actions$: Actions,
+    private authService: AuthService,
+    private store: Store<AppState>
+  ) {}
 }

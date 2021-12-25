@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Store } from '@ngrx/store';
 
-import { successfulLogin } from './store/auth.actions';
+import { setAuthStatus } from './store/auth.actions';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -24,7 +24,7 @@ export class AuthService {
       if (user) {
         let email = user.email;
         let uid = user.uid;
-        this.store.dispatch(successfulLogin({ uid, email }));
+        this.store.dispatch(setAuthStatus({ uid, email }));
       }
     });
   }
