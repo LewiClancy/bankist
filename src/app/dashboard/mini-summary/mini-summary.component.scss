@@ -1,8 +1,7 @@
 .summary {
   &__card {
-    position: relative;
     display: grid;
-    grid-template-rows: 3rem auto;
+    grid-template-rows: 3rem auto 4rem;
     border: var(--box-border);
     border-radius: 5px;
     box-shadow: var(--box-shadow);
@@ -43,8 +42,8 @@
   }
 
   &__action {
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
+    align-self: end;
+    justify-self: end;
+    margin: 0 1rem 1rem 0;
   }
 }

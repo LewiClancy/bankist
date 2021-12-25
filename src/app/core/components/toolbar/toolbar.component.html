@@ -3,20 +3,26 @@
     <div class="brand">
       <a routerLink="/">Bankist</a>
     </div>
-    <div
-      *ngIf="isLoggedIn$ | async as isLoggedIn"
-      class="hidden md:flex items-stretch gap-2 h-full"
-    >
-      <nav-link-item *ngIf="!isLoggedIn" [link]="['/auth', 'login']" matRipple
+    <div class="hidden md:flex items-stretch gap-2 h-full">
+      <nav-link-item
+        *ngIf="!(isLoggedIn$ | async)"
+        [link]="['/auth', 'login']"
+        matRipple
         >Login</nav-link-item
       >
-      <nav-link-item *ngIf="!isLoggedIn" [link]="['/auth', 'signup']" matRipple
+      <nav-link-item
+        *ngIf="!(isLoggedIn$ | async)"
+        [link]="['/auth', 'signup']"
+        matRipple
         >Signup</nav-link-item
       >
-      <nav-link-item *ngIf="isLoggedIn" [link]="['/dashboard']" matRipple
+      <nav-link-item
+        *ngIf="isLoggedIn$ | async"
+        [link]="['/dashboard']"
+        matRipple
         >Dashboard</nav-link-item
       >
-      <nav-link-item *ngIf="isLoggedIn" matRipple (click)="onSignOut()"
+      <nav-link-item *ngIf="isLoggedIn$ | async" matRipple (click)="onSignOut()"
         >Sign Out</nav-link-item
       >
     </div>

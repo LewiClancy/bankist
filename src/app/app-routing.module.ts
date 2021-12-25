@@ -17,6 +17,7 @@ const routes: Routes = [
 
   {
     path: 'transactions',
+    canLoad: [AuthGuard],
     loadChildren: () =>
       import('./transactions/transactions.module').then(
         m => m.TransactionsModule

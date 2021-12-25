@@ -4,15 +4,13 @@ table {
 
 .transactions {
   &__card {
-    border: 1px solid lightgray;
+    border: var(--box-border);
     border-radius: 5px;
-    position: relative;
     display: grid;
-    grid-template-rows: 3rem auto;
+    grid-template-rows: 3rem auto 4rem;
 
     @media (prefers-reduced-motion: no-preference) {
       transition: all 500ms ease;
-
       &:hover {
         box-shadow: 0 0 5px 0 rgba(#000, 0.25);
       }
@@ -22,20 +20,23 @@ table {
     padding-inline: 1rem;
     color: #fff;
     background-color: var(--clr-accent);
-    border-bottom: 1px solid lightgray;
-
+    border-bottom: var(--box-border);
     display: flex;
     align-items: center;
   }
   &__content {
     padding-block-end: 1rem;
-    margin-block-end: 3rem;
-    height: 370px;
-    overflow-y: scroll;
   }
   &__action {
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
+    align-self: end;
+    justify-self: end;
+    margin: 0 1rem 1rem 0;
+  }
+
+  @media screen and (min-width: 768px) {
+    &__content {
+      overflow-y: scroll;
+      height: 370px;
+    }
   }
 }

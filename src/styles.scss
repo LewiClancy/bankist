@@ -14,11 +14,10 @@ body {
 @import 'tailwindcss/utilities';
 
 :root {
-  --clr-accent: #673ab7de;
   --clr-primary: #673ab7;
-  --clr-border: lightgray;
+  --clr-accent: #673ab7de;
   --clr-white: #fff;
-  // --spread: 5px;
+  --clr-border: lightgray;
   --box-shadow: 0 0 5px 0 rgba(0 0 0 / 0.25);
   --box-shadow-huge: 0 0 10px 0 rgba(0 0 0 / 0.25);
   --box-border: var(--border-width, 1px) solid var(--clr-border);
