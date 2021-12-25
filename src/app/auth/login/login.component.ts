@@ -17,16 +17,23 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private store: Store
-  ) {
+  ) {}
+
+  ngOnInit(): void {
+    const emailRegex = RegExp(
+      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+    );
+
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: [
+        '',
+        [Validators.required, Validators.email, Validators.pattern(emailRegex)],
+      ],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
-  ngOnInit(): void {}
-
-  handleLogin() {
+  onLogin() {
     this.store.dispatch(
       login({
         email: this.loginForm.value['email'],
@@ -35,7 +42,7 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  switchToSignup() {
+  onSwitchToSignup() {
     this.router.navigateByUrl('/auth/signup');
   }
 
