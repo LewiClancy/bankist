@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Account, AccountOwner, Transaction } from '../core/models';
@@ -34,7 +35,9 @@ export class DashboardComponent implements OnInit {
 
   isLoading$!: Observable<boolean>;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, private titleService: Title) {
+    titleService.setTitle('Dashboard | Bankist');
+  }
 
   ngOnInit(): void {
     this.store.dispatch(dashboardEffects.loadAccountOwner());
