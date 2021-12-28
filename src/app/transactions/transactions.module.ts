@@ -23,7 +23,10 @@ import * as fromTransactions from './store';
     SharedModule,
     TransactionsRoutingModule,
     ReactiveFormsModule,
-    StoreModule.forFeature(fromTransactions.transactionsFeatureKey, fromTransactions.reducers, { metaReducers: fromTransactions.metaReducers }),
+    StoreModule.forFeature(
+      fromTransactions.transactionsFeatureKey,
+      fromTransactions.reducers
+    ),
   ],
 })
 export class TransactionsModule {}

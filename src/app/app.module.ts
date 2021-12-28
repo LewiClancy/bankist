@@ -16,6 +16,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers } from './store';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 const FirebaseUtilities = [
   AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -36,6 +37,7 @@ const FirebaseUtilities = [
     CoreModule,
     SharedModule,
     FirebaseUtilities,
+    StoreRouterConnectingModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
