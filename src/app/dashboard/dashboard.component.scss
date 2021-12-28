@@ -65,13 +65,3 @@
 #transactions {
   grid-area: transactions;
 }
-
-.loading {
-  margin-block-start: 4rem;
-  display: grid;
-  place-content: center;
-
-  @media (min-width: 768px) {
-    min-heigth: calc(100vh - var(--margin-top));
-  }
-}
