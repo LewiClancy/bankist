@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, combineLatest, of, switchMap } from 'rxjs';
+import { signOut } from 'src/app/auth/store/auth.actions';
 import { selectUserUid } from 'src/app/auth/store/auth.selectors';
 import { AccountOwner } from 'src/app/core/models';
 import { AppState } from 'src/app/store';
@@ -24,11 +25,12 @@ export class DashboardEffects {
         if (!accountOwnerId) {
           return of(dashboardActions.loadAccountOwnerFailed());
         }
-
+        console.log(accountOwnerId);
         const accOwnerInfo$ = this.dsService.loadAccountOwner(accountOwnerId);
 
-        const accOwnerDisplayImage$ =
-          this.dsService.loadUserProfileImage(accountOwnerId);
+        const accOwnerDisplayImage$ = this.dsService
+          .loadUserProfileImage(accountOwnerId)
+          .pipe(catchError(() => of(undefined)));
 
         const accountOwner$ = combineLatest([
           accOwnerInfo$,
@@ -88,6 +90,15 @@ export class DashboardEffects {
           }),
           catchError(() => of(dashboardActions.loadAccountTransactionsFailed()))
         );
+      })
+    );
+  });
+
+  clearDashbordStore$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(signOut),
+      switchMap(() => {
+        return of(dashboardActions.clearDashbordStore());
       })
     );
   });
