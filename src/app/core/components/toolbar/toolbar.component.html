@@ -22,6 +22,12 @@
         matRipple
         >Dashboard</nav-link-item
       >
+      <nav-link-item
+        *ngIf="isLoggedIn$ | async"
+        [link]="['/transactions']"
+        matRipple
+        >Transactions</nav-link-item
+      >
       <nav-link-item *ngIf="isLoggedIn$ | async" matRipple (click)="onSignOut()"
         >Sign Out</nav-link-item
       >

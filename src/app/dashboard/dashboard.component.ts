@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Account, AccountOwner, Transaction } from '../core/models';
 import { AppState } from '../store';
 import { selectIsLoading } from '../store/selectors/loading.selectors';
@@ -14,21 +14,24 @@ import * as dashboardSelectors from './store/dashboard.selectors';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   accountOwnerInfo$!: Observable<AccountOwner | undefined>;
-
   accountInfo$!: Observable<Account | undefined>;
-
+  isAppLoading$!: Observable<boolean>;
   transactions$!: Observable<Transaction[]>;
-
-  isLoading$!: Observable<boolean>;
+  isDashboardLoaded!: Subscription;
 
   constructor(private store: Store<AppState>, titleService: Title) {
     titleService.setTitle('Dashboard | Bankist');
   }
 
   ngOnInit(): void {
-    this.store.dispatch(dashboardEffects.loadAccountOwner());
+    //Load store only when it is undefined
+    this.isDashboardLoaded = this.store
+      .select(dashboardSelectors.isDashboardLoaded)
+      .subscribe((isLoaded: boolean) => {
+        !isLoaded && this.store.dispatch(dashboardEffects.loadAccountOwner());
+      });
 
     this.accountOwnerInfo$ = this.store.select(
       dashboardSelectors.selectAccountOwnerInfo
@@ -40,6 +43,10 @@ export class DashboardComponent implements OnInit {
       dashboardSelectors.selectAccountTransactions
     );
 
-    this.isLoading$ = this.store.select(selectIsLoading);
+    this.isAppLoading$ = this.store.select(selectIsLoading);
+  }
+
+  ngOnDestroy(): void {
+    this.isDashboardLoaded.unsubscribe();
   }
 }

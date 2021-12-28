@@ -21,3 +21,11 @@ export const selectAccountTransactions = createSelector(
   selectDashboardState,
   state => state.transactions
 );
+
+export const isDashboardLoaded = createSelector(
+  selectAccountInfo,
+  selectAccountOwnerInfo,
+  (account, owner) => {
+    return account && owner ? true : false;
+  }
+);
