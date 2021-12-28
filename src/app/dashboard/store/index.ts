@@ -20,6 +20,14 @@ export const initialState: DashboardState = {
 export const DashboardReducer = createReducer(
   initialState,
 
+  on(dashboardActions.clearDashbordStore, state => {
+    return {
+      ...state,
+      accountOwner: undefined,
+      accountInfo: undefined,
+      transactions: [],
+    };
+  }),
   on(dashboardActions.loadAccountOwnerSuccessful, (state, { accountOwner }) => {
     return {
       ...state,
