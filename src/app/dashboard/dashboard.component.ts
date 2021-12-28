@@ -28,8 +28,6 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('initialized');
-
     this.store.dispatch(dashboardEffects.loadAccountOwner());
 
     this.accountOwnerInfo$ = this.store.select(

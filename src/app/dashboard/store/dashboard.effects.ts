@@ -25,12 +25,16 @@ export class DashboardEffects {
         if (!accountOwnerId) {
           return of(dashboardActions.loadAccountOwnerFailed());
         }
-        console.log(accountOwnerId);
-        const accOwnerInfo$ = this.dsService.loadAccountOwner(accountOwnerId);
+
+        const accOwnerInfo$ = this.dsService
+          .loadAccountOwner(accountOwnerId)
+
 
         const accOwnerDisplayImage$ = this.dsService
           .loadUserProfileImage(accountOwnerId)
-          .pipe(catchError(() => of(undefined)));
+          .pipe(
+            catchError(() => of(undefined))
+          );
 
         const accountOwner$ = combineLatest([
           accOwnerInfo$,
