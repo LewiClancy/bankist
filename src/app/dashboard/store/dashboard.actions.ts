@@ -1,6 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 import { Account, AccountOwner, Transaction } from 'src/app/core/models';
 
+export const clearDashbordStore = createAction(
+  '[Auth Sservice] Clear The Dashboard Store'
+);
+
 export const loadAccountOwner = createAction(
   '[Dashboard Component] Load Account Owner Information'
 );
