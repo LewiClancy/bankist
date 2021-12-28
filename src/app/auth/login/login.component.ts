@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { login } from '../store/auth.actions';
@@ -16,8 +17,11 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private store: Store
-  ) {}
+    private store: Store,
+    titleService: Title
+  ) {
+    titleService.setTitle('Login | Bankist');
+  }
 
   ngOnInit(): void {
     const emailRegex = RegExp(
