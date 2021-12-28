@@ -8,6 +8,8 @@ import { TransactionsStartComponent } from './transactions-start/transactions-st
 import { TransactionsListComponent } from './transactions-list/transactions-list.component';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import * as fromTransactions from './store';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     TransactionsRoutingModule,
     ReactiveFormsModule,
+    StoreModule.forFeature(fromTransactions.transactionsFeatureKey, fromTransactions.reducers, { metaReducers: fromTransactions.metaReducers }),
   ],
 })
 export class TransactionsModule {}
