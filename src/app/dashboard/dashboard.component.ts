@@ -28,9 +28,9 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(dashboardEffects.loadAccountOwner());
+    console.log('initialized');
 
-    this.isLoading$ = this.store.select(selectIsLoading);
+    this.store.dispatch(dashboardEffects.loadAccountOwner());
 
     this.accountOwnerInfo$ = this.store.select(
       dashboardSelectors.selectAccountOwnerInfo
@@ -41,5 +41,7 @@ export class DashboardComponent implements OnInit {
     this.transactions$ = this.store.select(
       dashboardSelectors.selectAccountTransactions
     );
+
+    this.isLoading$ = this.store.select(selectIsLoading);
   }
 }
