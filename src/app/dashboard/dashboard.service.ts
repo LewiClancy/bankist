@@ -44,8 +44,10 @@ export class DashboardService {
   }
 
   loadUserProfileImage(accountId: string): Observable<string> {
-    return this.afStorage
-      .ref(`display-images/${accountId}.png`)
-      .getDownloadURL();
+    let ref = this.afStorage
+      .ref(`display-images/${accountId}`)
+      .child(`${accountId}.png`);
+
+    return ref.getDownloadURL();
   }
 }
