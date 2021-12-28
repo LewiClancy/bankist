@@ -1,3 +1,7 @@
 .nav {
   @apply lg:container mx-auto w-full h-full flex justify-between items-center;
 }
+
+.active {
+  @apply bg-purple-100;
+}
