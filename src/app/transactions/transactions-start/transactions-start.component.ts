@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
   styles: [
     `
       :host {
-        flex: 0 1 30%;
+        flex: 0 1 35%;
       }
     `,
   ],
