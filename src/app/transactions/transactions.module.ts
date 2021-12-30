@@ -9,7 +9,9 @@ import { TransactionsListComponent } from './transactions-list/transactions-list
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 import * as fromTransactions from './store';
+import { TransactionsEffects } from './store/transactions.effects';
 
 @NgModule({
   declarations: [
@@ -25,8 +27,9 @@ import * as fromTransactions from './store';
     ReactiveFormsModule,
     StoreModule.forFeature(
       fromTransactions.transactionsFeatureKey,
-      fromTransactions.reducers
+      fromTransactions.transactionsReducer
     ),
+    EffectsModule.forFeature([TransactionsEffects]),
   ],
 })
 export class TransactionsModule {}

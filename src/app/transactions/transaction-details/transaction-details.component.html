@@ -1,59 +1,48 @@
-<ng-container *ngIf="transaction$ | async as transaction">
-  <section class="transaction-details">
-    <header class="transaction-details__header">
-      <h2 class="no-mb">Transaction Details</h2>
-    </header>
+<section class="transaction-details">
+  <header class="transaction-details__header">
+    <h2 class="no-mb">Transaction Details</h2>
+  </header>
 
-    <div class="transaction-details__content flex flex-col">
-      <form [formGroup]="detailForm" class="flex flex-col">
-        <mat-form-field appearance="outline">
-          <mat-label>Transaction Id</mat-label>
-          <input type="text" matInput formControlName="id" [readonly]="true" />
-        </mat-form-field>
+  <div class="transaction-details__content flex flex-col">
+    <form [formGroup]="detailForm" class="flex flex-col">
+      <mat-form-field appearance="outline">
+        <mat-label>Transaction Id</mat-label>
+        <input type="text" matInput formControlName="id" [readonly]="true" />
+      </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Transaction date</mat-label>
-          <input
-            type="text"
-            matInput
-            formControlName="date"
-            [readonly]="true"
-          />
-        </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Transaction date</mat-label>
+        <input type="text" matInput formControlName="date" [readonly]="true" />
+      </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Transaction Type</mat-label>
-          <input
-            type="text"
-            matInput
-            formControlName="kind"
-            [readonly]="true"
-          />
-        </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Transaction Type</mat-label>
+        <input type="text" matInput formControlName="kind" [readonly]="true" />
+      </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Sender / Recipient</mat-label>
-          <input
-            type="text"
-            matInput
-            formControlName="accountId"
-            [readonly]="true"
-          />
-        </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Sender / Recipient</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="accountId"
+          [readonly]="true"
+        />
+      </mat-form-field>
 
-        <mat-form-field appearance="outline">
-          <mat-label>Transaction message</mat-label>
-          <textarea
-            type="text"
-            matInput
-            formControlName="message"
-            [readonly]="true"
-          ></textarea>
-        </mat-form-field>
-      </form>
-      <button mat-stroked-button color="primary" (click)="handleClose()">
-        Close
-      </button>
-    </div>
-  </section>
-</ng-container>
+      <mat-form-field appearance="outline">
+        <mat-label>Transaction message</mat-label>
+        <textarea
+          type="text"
+          resize="vertical"
+          matInput
+          formControlName="message"
+          [readonly]="true"
+        ></textarea>
+      </mat-form-field>
+    </form>
+    <button mat-stroked-button color="primary" (click)="onClose()">
+      Close
+    </button>
+  </div>
+</section>

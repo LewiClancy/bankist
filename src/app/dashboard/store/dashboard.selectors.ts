@@ -7,6 +7,11 @@ export const selectDashboardState =
     fromDashboard.dashboardFeatureKey
   );
 
+export const selectAccountId = createSelector(
+  selectDashboardState,
+  state => state.accountInfo?.id
+);
+
 export const selectAccountOwnerInfo = createSelector(
   selectDashboardState,
   state => state.accountOwner

@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { Transaction } from 'src/app/core/models';
+import { AppState } from 'src/app/store';
+import { selectSelectedTransaction } from '../store/transaction.selectors';
+import {
+  clearSelectedTransaction,
+} from '../store/transactions.actions';
 
 @Component({
   selector: 'app-transaction-details',
@@ -10,48 +16,61 @@ import { Transaction } from 'src/app/core/models';
   styleUrls: ['./transaction-details.component.scss'],
 })
 export class TransactionDetailsComponent implements OnInit {
-  transaction$!: Observable<Transaction>;
-
-  detailForm = this.fb.group({
-    id: [''],
-    accountId: [''],
-    date: [''],
-    amount: [''],
-    kind: [''],
-    message: [''],
-  });
+  transactionSub!: Subscription;
+  detailForm!: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
-    this.getTransaction();
+    this.detailForm = this.fb.group({
+      id: [''],
+      accountId: [''],
+      date: [''],
+      amount: [''],
+      kind: [''],
+      message: [''],
+    });
+
+    this.getTransactionDetails();
   }
 
-  getTransaction() {
-    this.transaction$ = this.route.data.pipe(
-      map(data => data['transaction']),
-      tap(transaction => {
-        this.detailForm.patchValue({
-          id: transaction.id,
-          accountId: transaction.accountId,
-          date: this.transformDate(transaction.date),
-          amount: transaction.amount,
-          kind: transaction.kind,
-          message: transaction?.message ?? 'This transaction has no message',
-        });
-      })
-    );
+  private getTransactionDetails() {
+    this.transactionSub = this.store
+      .select(selectSelectedTransaction)
+      .subscribe(transaction => {
+        if (transaction) {
+          this.updateDetailsForm(transaction);
+        } else {
+          this.router.navigate(['../'], { relativeTo: this.route });
+        }
+      });
   }
 
-  transformDate(date: Date) {
+  private updateDetailsForm(transaction: Transaction) {
+    this.detailForm.patchValue({
+      id: transaction.id,
+      accountId: transaction.accountId,
+      amount: transaction.amount,
+      kind: transaction.kind,
+      message: transaction?.message ?? 'This transaction has no message',
+      date: this.transformDate(
+        transaction.date.seconds,
+        transaction.date.nanoseconds
+      ),
+    });
+  }
+
+  transformDate(seconds: number, nanoseconds: number = 0) {
+    const date = new Date(seconds * 1000 + nanoseconds);
     return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
   }
 
-  handleClose() {
-    this.router.navigate(['../'], { relativeTo: this.route });
+  onClose() {
+    this.store.dispatch(clearSelectedTransaction());
   }
 }
