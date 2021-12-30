@@ -1,9 +1,5 @@
 .transactions {
-  @apply container mx-auto px-2;
-
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
+  @apply container mx-auto px-2 flex justify-center gap-4;
 }
 
 .transactions-list {
