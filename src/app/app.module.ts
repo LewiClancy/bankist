@@ -17,16 +17,24 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers } from './store';
 import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { AuthEffects } from './store/effects/auth.effects';
 
 const FirebaseUtilities = [
   AngularFireModule.initializeApp(environment.firebaseConfig),
   AngularFirestoreModule,
   AngularFireAuthModule,
   AngularFirestoreModule,
-  StoreModule.forRoot(reducers),
-  EffectsModule.forRoot([]),
-  !environment.production ? StoreDevtoolsModule.instrument() : [],
 ];
+
+const AppEffects = [AuthEffects];
+
+const NgrxUtilities = [
+  StoreModule.forRoot(reducers),
+  EffectsModule.forRoot(AppEffects),
+  !environment.production ? StoreDevtoolsModule.instrument() : [],
+  StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal }),
+];
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -37,7 +45,7 @@ const FirebaseUtilities = [
     CoreModule,
     SharedModule,
     FirebaseUtilities,
-    StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal }),
+    NgrxUtilities,
   ],
   providers: [],
   bootstrap: [AppComponent],
