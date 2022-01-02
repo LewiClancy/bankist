@@ -5,9 +5,10 @@ import { LinkItemComponent } from './components/link-item/link-item.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { AlertComponent } from './components/alert/alert.component';
+import { NavLinksComponent } from './components/nav-links/nav-links.component';
 
 @NgModule({
-  declarations: [ToolbarComponent, LinkItemComponent, AlertComponent],
+  declarations: [ToolbarComponent, LinkItemComponent, AlertComponent, NavLinksComponent],
   imports: [SharedModule, RouterModule, AngularMaterialModule],
   exports: [ToolbarComponent, AlertComponent],
 })
