@@ -1,11 +1,9 @@
 :host {
-  display: grid;
-  place-content: center;
+  @apply grid place-content-center;
 }
 
 .field {
-  display: flex;
-  flex-direction: column;
+  @apply flex flex-col;
   padding-block-start: 1.5rem;
   max-width: 40rem;
 }

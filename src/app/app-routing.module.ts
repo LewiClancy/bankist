@@ -4,11 +4,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
-  {
-    path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
-  },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'login',
     component: LoginComponent,
@@ -19,13 +15,19 @@ const routes: Routes = [
     loadChildren: () =>
       import('./dashboard/dashboard.module').then(m => m.DashboardModule),
   },
-
   {
     path: 'transactions',
     canLoad: [AuthGuard],
     loadChildren: () =>
       import('./transactions/transactions.module').then(
         m => m.TransactionsModule
+      ),
+  },
+  {
+    path: 'create-account',
+    loadChildren: () =>
+      import('./create-account/create-account.module').then(
+        m => m.CreateAccountModule
       ),
   },
 ];

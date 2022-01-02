@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectIsLoggedIn } from 'src/app/auth/store/auth.selectors';
 import { signOut } from 'src/app/store/actions/auth.actions';
+import { selectIsLoggedIn } from 'src/app/store/selectors/auth.selectors';
 
 @Component({
   selector: 'app-toolbar',

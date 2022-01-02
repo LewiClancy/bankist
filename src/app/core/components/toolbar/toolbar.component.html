@@ -6,13 +6,13 @@
     <div class="hidden md:flex items-stretch gap-2 h-full">
       <nav-link-item
         *ngIf="!(isLoggedIn$ | async)"
-        [link]="['/auth', 'login']"
+        [link]="['/login']"
         matRipple
         >Login</nav-link-item
       >
       <nav-link-item
         *ngIf="!(isLoggedIn$ | async)"
-        [link]="['/auth', 'signup']"
+        [link]="['/create-account']"
         matRipple
         >Signup</nav-link-item
       >
@@ -54,17 +54,13 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <a
-          mat-menu-item
-          [routerLink]="['/auth', 'login']"
-          routerLinkActive="active"
-        >
+        <a mat-menu-item [routerLink]="['/login']" routerLinkActive="active">
           <mat-icon>login</mat-icon>
           <span>Switch to Login</span>
         </a>
         <a
           mat-menu-item
-          [routerLink]="['/auth', 'signup']"
+          [routerLink]="['/create-account']"
           routerLinkActive="active"
         >
           <mat-icon>account_circle</mat-icon>
