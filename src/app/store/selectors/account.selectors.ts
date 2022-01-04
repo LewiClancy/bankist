@@ -15,3 +15,8 @@ export const selectAccountId = createSelector(
   selectAccountInfo,
   state => state?.id
 );
+
+export const selectRecentTransactions = createSelector(
+  selectAccountFeatureState,
+  state => state.recentTransactions
+);

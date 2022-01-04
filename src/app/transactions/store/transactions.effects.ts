@@ -6,11 +6,11 @@ import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { TransactionsService } from '../transactions.service';
 import * as tnxActions from './transactions.actions';
 import { AppState } from 'src/app/store';
-import { selectAccountId } from 'src/app/dashboard/store/dashboard.selectors';
 import {
   startLoading,
   stopLoading,
 } from 'src/app/store/actions/loading.actions';
+import { selectAccountId } from 'src/app/store/selectors/account.selectors';
 
 @Injectable()
 export class TransactionsEffects {

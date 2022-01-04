@@ -9,17 +9,22 @@ export const selectIsLoggedIn = createSelector(selectAuthState, state => {
   return state.user ? true : false;
 });
 
-export const selectUserUid = createSelector(
+export const selectLoggedInUser = createSelector(
   selectAuthState,
-  state => state.user?.id
+  state => state.user
+);
+
+export const selectUserUid = createSelector(
+  selectLoggedInUser,
+  state => state?.id
 );
 
 export const selectAccountId = createSelector(
-  selectAuthState,
-  state => state.user?.accountId
+  selectLoggedInUser,
+  state => state?.accountId
 );
 
 export const selectUserEmail = createSelector(
-  selectAuthState,
-  state => state.user?.email
+  selectLoggedInUser,
+  state => state?.email
 );
