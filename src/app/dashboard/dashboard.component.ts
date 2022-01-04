@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Account, AccountOwner, Transaction } from '../core/models';
 import { AppState } from '../store';
 import { selectIsLoading } from '../store/selectors/loading.selectors';
 
 import * as accountSelectors from '../store/selectors/account.selectors';
 import { selectLoggedInUser } from '../store/selectors/auth.selectors';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,9 +20,12 @@ export class DashboardComponent implements OnInit {
   accountInfo$!: Observable<Account | undefined>;
   isAppLoading$!: Observable<boolean>;
   transactions$!: Observable<Transaction[]>;
-  isDashboardLoaded!: Subscription;
 
-  constructor(private store: Store<AppState>, titleService: Title) {
+  constructor(
+    private store: Store<AppState>,
+    private router: Router,
+    titleService: Title
+  ) {
     titleService.setTitle('Dashboard | Bankist');
   }
 
@@ -35,5 +39,9 @@ export class DashboardComponent implements OnInit {
     );
 
     this.isAppLoading$ = this.store.select(selectIsLoading);
+  }
+
+  onViewTransactions() {
+    this.router.navigateByUrl('/transactions');
   }
 }
