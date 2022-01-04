@@ -19,6 +19,7 @@ import { reducers } from './store';
 import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { AuthEffects } from './store/effects/auth.effects';
 import { LoginComponent } from './login/login.component';
+import { AccountEffects } from './store/effects/account.effects';
 
 const FirebaseUtilities = [
   AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -27,7 +28,7 @@ const FirebaseUtilities = [
   AngularFirestoreModule,
 ];
 
-const AppEffects = [AuthEffects];
+const AppEffects = [AuthEffects, AccountEffects];
 
 const NgrxUtilities = [
   StoreModule.forRoot(reducers),

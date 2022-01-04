@@ -18,6 +18,7 @@ import * as loadingActions from '../../store/actions/loading.actions';
 import { getErrorMessage } from 'src/app/core/services';
 import { AuthService } from '../../core/services/auth.service';
 import { AccountOwner } from 'src/app/core/models';
+import { loadAccountInfo } from '../actions/account.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -105,7 +106,10 @@ export class AuthEffects {
               id: userId,
               displayImage: userImg,
             };
-            return of(authActions.loadUserInfoSuccess({ user }));
+            return of(
+              authActions.loadUserInfoSuccess({ user }),
+              loadAccountInfo({ accountId: user.accountId })
+            );
           }),
           catchError(error =>
             of(authActions.loadUserInfoFailed({ errorCode: error.code }))
