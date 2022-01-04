@@ -19,11 +19,6 @@ export const selectUserUid = createSelector(
   state => state?.id
 );
 
-export const selectAccountId = createSelector(
-  selectLoggedInUser,
-  state => state?.accountId
-);
-
 export const selectUserEmail = createSelector(
   selectLoggedInUser,
   state => state?.email
