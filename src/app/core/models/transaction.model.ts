@@ -6,6 +6,10 @@ export interface Transaction {
     seconds: number;
     nanoseconds?: number;
   };
-  accountId: string;
+  account: {
+    id: string;
+    ownerFirstName: string;
+    ownerSurname: string;
+  };
   message?: string;
 }

@@ -6,9 +6,7 @@ import { Subscription } from 'rxjs';
 import { Transaction } from 'src/app/core/models';
 import { AppState } from 'src/app/store';
 import { selectSelectedTransaction } from '../store/transaction.selectors';
-import {
-  clearSelectedTransaction,
-} from '../store/transactions.actions';
+import { clearSelectedTransaction } from '../store/transactions.actions';
 
 @Component({
   selector: 'app-transaction-details',
@@ -54,7 +52,7 @@ export class TransactionDetailsComponent implements OnInit {
   private updateDetailsForm(transaction: Transaction) {
     this.detailForm.patchValue({
       id: transaction.id,
-      accountId: transaction.accountId,
+      accountId: `${transaction.account.ownerFirstName} ${transaction.account.ownerSurname}`,
       amount: transaction.amount,
       kind: transaction.kind,
       message: transaction?.message ?? 'This transaction has no message',

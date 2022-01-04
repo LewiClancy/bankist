@@ -29,7 +29,8 @@
           Sender / Recipient
         </th>
         <td mat-cell *matCellDef="let transaction">
-          {{ transaction.accountId | titlecase }}
+          {{ transaction.account.ownerFirstName | titlecase }}
+          {{ transaction.account.ownerSurname | titlecase }}
         </td>
       </ng-container>
 

@@ -6,9 +6,10 @@
   <div class="transactions__content">
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="account">
-        <th mat-header-cell *matHeaderCellDef>Recipient</th>
+        <th mat-header-cell *matHeaderCellDef>To / From</th>
         <td mat-cell *matCellDef="let transaction">
-          {{ transaction.accountId | titlecase }}
+          {{ transaction.account.ownerFirstName | titlecase }}
+          {{ transaction.account.ownerSurname | titlecase }}
         </td>
       </ng-container>
 
