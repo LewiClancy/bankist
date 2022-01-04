@@ -1,25 +1,24 @@
+import { state } from '@angular/animations';
 import { createReducer, on } from '@ngrx/store';
+import { AccountOwner } from 'src/app/core/models';
 import * as authActions from '../actions/auth.actions';
 
 export const authFeatureKey = 'auth';
 
 export interface AuthState {
-  uid: string | undefined;
-  email: string | null | undefined;
+  user: AccountOwner | undefined;
 }
 
 export const initialState: AuthState = {
-  uid: undefined,
-  email: undefined,
+  user: undefined,
 };
 
 export const reducer = createReducer(
   initialState,
-  on(authActions.setAuthStatus, (state: AuthState, { email, uid }) => {
+  on(authActions.loadUserInfoSuccess, (state, { user }) => {
     return {
       ...state,
-      uid,
-      email,
+      user,
     };
   }),
 

@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { AccountOwner } from 'src/app/core/models';
 
 export const login = createAction(
   '[Login Page] Login Request',
@@ -8,7 +9,10 @@ export const login = createAction(
   }>()
 );
 
-export const loginSuccess = createAction('[Auth Effect] Login Successful');
+export const loginSuccess = createAction(
+  '[Auth Service] Login Successful',
+  props<{ userId: string }>()
+);
 
 export const loginFailed = createAction(
   '[Auth Effect] Login Not Successful',
@@ -21,3 +25,18 @@ export const setAuthStatus = createAction(
 );
 
 export const signOut = createAction('[Navigation Bar] Sign Out');
+
+export const loadUserInfo = createAction(
+  '[Auth Effect] Load user information ',
+  props<{ userId: string }>()
+);
+
+export const loadUserInfoSuccess = createAction(
+  '[Auth Effect] Load user information success',
+  props<{ user: AccountOwner }>()
+);
+
+export const loadUserInfoFailed = createAction(
+  '[Auth Effect] Load user information failed',
+  props<{ errorCode: string }>()
+);

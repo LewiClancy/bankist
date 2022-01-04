@@ -1,5 +1,6 @@
 :host {
   @apply grid place-content-center;
+  grid-auto-columns: minmax(300px, 600px);
 }
 
 .field {

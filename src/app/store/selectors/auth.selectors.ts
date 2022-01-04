@@ -6,16 +6,20 @@ export const selectAuthState = createFeatureSelector<fromAuth.AuthState>(
 );
 
 export const selectIsLoggedIn = createSelector(selectAuthState, state => {
-  if (state && state.uid && state.email) return true;
-  else return false;
+  return state.user ? true : false;
 });
 
 export const selectUserUid = createSelector(
   selectAuthState,
-  state => state?.uid
+  state => state.user?.id
 );
 
-export const selectEmail = createSelector(
+export const selectAccountId = createSelector(
   selectAuthState,
-  state => state?.email
+  state => state.user?.accountId
+);
+
+export const selectUserEmail = createSelector(
+  selectAuthState,
+  state => state.user?.email
 );

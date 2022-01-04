@@ -25,6 +25,14 @@ export class DashboardService {
       );
   }
 
+  loadUserProfileImage(accountId: string): Observable<string> {
+    let ref = this.afStorage
+      .ref(`display-images/${accountId}`)
+      .child(`${accountId}.png`);
+
+    return ref.getDownloadURL();
+  }
+
   loadAccountInfo(accountId: string) {
     return this.afs
       .collection('/accounts')
@@ -41,13 +49,5 @@ export class DashboardService {
     return this.afs
       .collection<Transaction>(`accounts/${accountId}/transactions`)
       .valueChanges();
-  }
-
-  loadUserProfileImage(accountId: string): Observable<string> {
-    let ref = this.afStorage
-      .ref(`display-images/${accountId}`)
-      .child(`${accountId}.png`);
-
-    return ref.getDownloadURL();
   }
 }
