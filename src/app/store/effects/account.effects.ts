@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, of, switchMap } from 'rxjs';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { AccountService } from 'src/app/core/services/account.service';
 
 import * as accountActions from '../actions/account.actions';
 
 @Injectable()
 export class AccountEffects {
-  constructor(private authService: AuthService, private actions$: Actions) {}
+  constructor(
+    private accountService: AccountService,
+    private actions$: Actions
+  ) {}
 
   loadAccountInfo$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(accountActions.loadAccountInfo),
       switchMap(({ accountId }) => {
-        return this.authService.loadAccountInfo(accountId).pipe(
+        return this.accountService.loadAccountInfo(accountId).pipe(
           switchMap(accountInfo => {
             return of(
               accountActions.loadAccountInfoSuccess({ accountInfo }),
@@ -34,7 +37,7 @@ export class AccountEffects {
     return this.actions$.pipe(
       ofType(accountActions.loadAccountInfo),
       switchMap(({ accountId }) => {
-        return this.authService.loadRecentTransactions(accountId).pipe(
+        return this.accountService.loadRecentTransactions(accountId).pipe(
           switchMap(recentTransactions => {
             return of(
               accountActions.loadRecentTransactionsSuccess({

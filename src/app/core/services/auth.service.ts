@@ -61,28 +61,4 @@ export class AuthService {
 
     return ref.getDownloadURL();
   }
-
-  loadAccountInfo(accountId: string) {
-    return this.afs
-      .collection('/accounts')
-      .doc<Account>(accountId)
-      .snapshotChanges()
-      .pipe(
-        map(accountSnapshot => {
-          return convertSnaps<Account>(accountSnapshot);
-        })
-      );
-  }
-
-  loadRecentTransactions(accountId: string) {
-    let collectionRef = `accounts/${accountId}/transactions`;
-
-    return this.afs
-      .collection<Transaction>(collectionRef, ref => {
-        ref.limit(10);
-        ref.orderBy('date');
-        return ref;
-      }) //querry ten recent transactions
-      .valueChanges();
-  }
 }
