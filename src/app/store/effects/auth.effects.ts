@@ -42,47 +42,11 @@ export class AuthEffects {
     );
   });
 
-  setAuthStatus$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(authActions.setAuthStatus),
-        exhaustMap(() => {
-          this.router.navigateByUrl('/dashboard');
-          return of(() => EMPTY);
-        })
-      );
-    },
-    { dispatch: false }
-  );
-
-  unsuccessfulLogin$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(authActions.loginFailed),
-      switchMap(({ errorCode }) => {
-        console.log(errorCode);
-        return of(setErrorMessage({ message: getErrorMessage(errorCode) }));
-      })
-    );
-  });
-
-  signOut$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(authActions.signOut),
-        switchMap(() => {
-          this.authService.handleSignOut();
-          this.router.navigateByUrl('/auth/login');
-          return of(() => EMPTY);
-        })
-      );
-    },
-    { dispatch: false }
-  );
-
   loginSuccess$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(authActions.loginSuccess),
       switchMap(({ userId }) => {
+        this.store.dispatch(loadingActions.startLoading());
         return of(authActions.loadUserInfo({ userId }));
       })
     );
@@ -124,7 +88,32 @@ export class AuthEffects {
       return this.actions$.pipe(
         ofType(authActions.loadUserInfoSuccess),
         switchMap(() => {
+          this.store.dispatch(loadingActions.stopLoading());
           return this.router.navigateByUrl('/dashboard');
+        })
+      );
+    },
+    { dispatch: false }
+  );
+
+  unsuccessfulLogin$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(authActions.loginFailed, authActions.loadUserInfoFailed),
+      switchMap(({ errorCode }) => {
+        console.log(errorCode);
+        return of(setErrorMessage({ message: getErrorMessage(errorCode) }));
+      })
+    );
+  });
+
+  signOut$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(authActions.signOut),
+        switchMap(() => {
+          this.authService.handleSignOut();
+          this.router.navigateByUrl('/auth/login');
+          return of(() => EMPTY);
         })
       );
     },
