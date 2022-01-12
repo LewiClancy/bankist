@@ -1,23 +1,14 @@
 import { Injectable } from '@angular/core';
-import {
-  catchError,
-  combineLatest,
-  EMPTY,
-  exhaustMap,
-  from,
-  of,
-  switchMap,
-} from 'rxjs';
+import { catchError, exhaustMap, of, switchMap } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/store';
+import { AppState } from '../../store';
 import * as authActions from '../actions/auth.actions';
-import { setErrorMessage } from 'src/app/store/actions/alert.actions';
 import * as loadingActions from '../../store/actions/loading.actions';
-import { getErrorMessage } from 'src/app/core/services';
+import { setErrorMessage } from '../../store/actions/alert.actions';
+import { getErrorMessage } from '../../core/services';
 import { AuthService } from '../../core/services/auth.service';
-import { AccountOwner } from 'src/app/core/models';
 import { loadAccountInfo } from '../actions/account.actions';
 
 @Injectable()
@@ -25,13 +16,20 @@ export class AuthEffects {
   login$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(authActions.login),
-      exhaustMap(action => {
+      exhaustMap(({ email, password }) => {
         this.store.dispatch(loadingActions.startLoading());
-        return from(
-          this.authService.handleLogin(action.email, action.password)
-        ).pipe(
-          switchMap(() => {
-            return of(loadingActions.stopLoading());
+        return this.authService.handleLogin(email, password).pipe(
+          switchMap(({ user }) => {
+            if (user) {
+              return of(
+                loadingActions.stopLoading(),
+                authActions.loginSuccess({ userId: user.uid })
+              );
+            } else {
+              return of(
+                authActions.loginFailed({ errorCode: 'Unknown Error Occured' })
+              );
+            }
           }),
           catchError(error => {
             this.store.dispatch(loadingActions.stopLoading());
@@ -44,10 +42,13 @@ export class AuthEffects {
 
   loginSuccess$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(authActions.loginSuccess),
-      switchMap(({ userId }) => {
-        this.store.dispatch(loadingActions.startLoading());
-        return of(authActions.loadUserInfo({ userId }));
+      ofType(authActions.loginSuccess, authActions.autoLoginSuccess),
+      exhaustMap(({ userId }) => {
+        debugger;
+        return of(
+          authActions.loadUserInfo({ userId }),
+          loadingActions.startLoading()
+        );
       })
     );
   });
@@ -56,24 +57,11 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(authActions.loadUserInfo),
       switchMap(({ userId }) => {
-        let userInfo$ = this.authService.loadUserInfo(userId);
-        let userImg$ = this.authService
-          .loadUserProfileImage(userId)
-          .pipe(catchError(() => of(undefined)));
-
-        let user$ = combineLatest([userInfo$, userImg$]);
-
-        return user$.pipe(
-          switchMap(([userInfo, userImg]) => {
-            let user: AccountOwner = {
-              ...userInfo,
-              id: userId,
-              displayImage: userImg,
-            };
-            return of(
-              authActions.loadUserInfoSuccess({ user }),
-              loadAccountInfo({ accountId: user.accountId })
-            );
+        debugger;
+        return this.authService.loadUserInfo(userId).pipe(
+          switchMap(user => {
+            debugger;
+            return of(authActions.loadUserInfoSuccess({ user }));
           }),
           catchError(error =>
             of(authActions.loadUserInfoFailed({ errorCode: error.code }))
@@ -96,11 +84,19 @@ export class AuthEffects {
     { dispatch: false }
   );
 
+  loadAccountInfo$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(authActions.loadUserInfoSuccess),
+      switchMap(({ user }) => {
+        return of(loadAccountInfo({ accountId: user.accountId }));
+      })
+    );
+  });
+
   unsuccessfulLogin$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(authActions.loginFailed, authActions.loadUserInfoFailed),
       switchMap(({ errorCode }) => {
-        console.log(errorCode);
         return of(setErrorMessage({ message: getErrorMessage(errorCode) }));
       })
     );
@@ -111,9 +107,7 @@ export class AuthEffects {
       return this.actions$.pipe(
         ofType(authActions.signOut),
         switchMap(() => {
-          this.authService.handleSignOut();
-          this.router.navigateByUrl('/auth/login');
-          return of(() => EMPTY);
+          return of(this.authService.handleSignOut());
         })
       );
     },

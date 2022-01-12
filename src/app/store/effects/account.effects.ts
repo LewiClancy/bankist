@@ -29,6 +29,7 @@ export class AccountEffects {
             );
           }),
           catchError(error => {
+            this.store.dispatch(stopLoading());
             return of(
               accountActions.loadAccountInfoFailed({ errorCode: error.code })
             );
@@ -40,7 +41,7 @@ export class AccountEffects {
 
   loadRecentTransactions$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(accountActions.loadAccountInfo),
+      ofType(accountActions.loadRecentTransactions),
       switchMap(({ accountId }) => {
         return this.accountService.loadRecentTransactions(accountId).pipe(
           switchMap(recentTransactions => {
@@ -49,6 +50,12 @@ export class AccountEffects {
               accountActions.loadRecentTransactionsSuccess({
                 recentTransactions,
               })
+            );
+          }),
+          catchError(error => {
+            this.store.dispatch(stopLoading());
+            return of(
+              accountActions.loadAccountInfoFailed({ errorCode: error.code })
             );
           })
         );

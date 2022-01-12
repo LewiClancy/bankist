@@ -16,7 +16,7 @@
     <mat-icon>manage_accounts</mat-icon>
   </button>
   <mat-menu #manageAcc="matMenu">
-    <button mat-menu-item (click)="onSignOut()" *ngIf="isLoggedIn">
+    <button mat-menu-item (click)="this.signOut.emit()" *ngIf="isLoggedIn">
       <mat-icon>logout</mat-icon>
       <span>Sign Out</span>
     </button>

@@ -14,7 +14,4 @@ export class NavLinksComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSignOut() {
-    this.signOut.emit();
-  }
 }

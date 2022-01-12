@@ -16,10 +16,6 @@ export const loadAccountInfoFailed = createAction(
   props<{ errorCode: string }>()
 );
 
-export const clearAccountStore = createAction(
-  '[] Clear the Account store on logout'
-);
-
 export const loadRecentTransactions = createAction(
   '[Account Effects] Load Recent Account Transactions',
   props<{ accountId: string }>()

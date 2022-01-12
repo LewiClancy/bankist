@@ -1,4 +1,3 @@
-import { state } from '@angular/animations';
 import { createReducer, on } from '@ngrx/store';
 import { AccountOwner } from 'src/app/core/models';
 import * as authActions from '../actions/auth.actions';
@@ -15,16 +14,15 @@ export const initialState: AuthState = {
 
 export const reducer = createReducer(
   initialState,
+
   on(authActions.loadUserInfoSuccess, (state, { user }) => {
     return {
       ...state,
       user,
     };
   }),
-
   on(authActions.signOut, state => ({
     ...state,
-    uid: '',
-    email: '',
+    user: undefined,
   }))
 );

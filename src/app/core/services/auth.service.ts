@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { map, Observable } from 'rxjs';
-import {
-  loginSuccess,
-  setAuthStatus,
-} from 'src/app/store/actions/auth.actions';
-import { Account, AccountOwner, Transaction } from '../models';
+import { catchError, combineLatest, from, map, Observable, tap } from 'rxjs';
+import * as authActions from 'src/app/store/actions/auth.actions';
+import * as authSelectors from 'src/app/store/selectors/auth.selectors';
+import { AccountOwner } from '../models';
 import { convertSnaps } from './firestore-utils.service';
 
 @Injectable({ providedIn: 'root' })
@@ -17,48 +16,69 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private afStorage: AngularFireStorage,
-    private store: Store
+    private store: Store,
+    private router: Router
   ) {
-    this.handleAuthStateChange();
+    this.handleAutoSignIn();
   }
 
   handleLogin(email: string, password: string) {
-    return this.afAuth.signInWithEmailAndPassword(email, password);
+    return from(this.afAuth.signInWithEmailAndPassword(email, password));
   }
 
-  handleSignOut() {
-    return this.afAuth.signOut();
+  isLoggedIn() {
+    return this.afAuth.authState;
   }
 
-  handleAuthStateChange() {
-    //Handle automatic signIns
+  handleAutoSignIn() {
     this.afAuth.onAuthStateChanged(user => {
-      if (user) {
-        let email = user.email;
-        let uid = user.uid;
-        this.store.dispatch(setAuthStatus({ uid, email }));
-        this.store.dispatch(loginSuccess({ userId: uid }));
-      }
+      if (user)
+        this.store.dispatch(authActions.autoLoginSuccess({ userId: user.uid }));
     });
   }
 
-  loadUserInfo(ownerId: string) {
-    return this.afs
-      .collection('account-owners')
-      .doc<AccountOwner>(ownerId)
+  handleSignOut() {
+    authSelectors.selectLoggedInUser.clearResult();
+
+    return this.afAuth
+      .signOut()
+      .then(() => this.router.navigateByUrl('/login'));
+  }
+
+  loadUserInfo(userId: string) {
+    const userCollectionRef = `account-owners/${userId}`;
+    const user$ = this.afs
+      .doc<AccountOwner>(userCollectionRef)
       .snapshotChanges()
       .pipe(
         map(accOwnerSnapshot => {
+          debugger;
           return convertSnaps<AccountOwner>(accOwnerSnapshot);
         })
       );
+
+    const userImg$ = this.loadUserProfileImage(userId).pipe(
+      tap(() => console.log('user'))
+    );
+
+    const userInfo$ = combineLatest([user$, userImg$]);
+
+    return userInfo$.pipe(
+      map(([userInfo, displayImage]) => {
+        return {
+          ...userInfo,
+          id: userId,
+          displayImage,
+        };
+      })
+    );
   }
 
   loadUserProfileImage(accountId: string): Observable<string> {
-    let ref = this.afStorage
+    let imageRef = this.afStorage
       .ref(`display-images/${accountId}`)
       .child(`${accountId}.png`);
 
-    return ref.getDownloadURL();
+    return imageRef.getDownloadURL();
   }
 }

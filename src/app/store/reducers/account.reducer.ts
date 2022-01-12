@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { Account, Transaction } from 'src/app/core/models';
 import * as accountActions from '../actions/account.actions';
+import { signOut } from '../actions/auth.actions';
 
 export const accountFeaturekey = 'account';
 
@@ -34,7 +35,7 @@ export const reducer = createReducer(
     }
   ),
 
-  on(accountActions.clearAccountStore, state => ({
+  on(signOut, state => ({
     ...state,
     accountInfo: undefined,
     recentTransactions: [],
