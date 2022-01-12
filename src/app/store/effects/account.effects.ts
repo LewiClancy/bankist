@@ -6,7 +6,7 @@ import { AccountService } from 'src/app/core/services/account.service';
 import { AppState } from '..';
 
 import * as accountActions from '../actions/account.actions';
-import { startLoading, stopLoading } from '../actions/loading.actions';
+import { stopLoading } from '../actions/loading.actions';
 
 @Injectable()
 export class AccountEffects {

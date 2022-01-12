@@ -3,19 +3,10 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Router } from '@angular/router';
-import { Action, Store } from '@ngrx/store';
-import {
-  catchError,
-  combineLatest,
-  from,
-  map,
-  Observable,
-  Observer,
-  tap,
-} from 'rxjs';
+import { Store } from '@ngrx/store';
+import { catchError, combineLatest, from, map, Observable, of } from 'rxjs';
 import * as authActions from 'src/app/store/actions/auth.actions';
 import { startLoading } from 'src/app/store/actions/loading.actions';
-import * as authSelectors from 'src/app/store/selectors/auth.selectors';
 import { AccountOwner } from '../models';
 import { convertSnaps } from './firestore-utils.service';
 
@@ -52,8 +43,6 @@ export class AuthService {
   }
 
   handleSignOut() {
-    authSelectors.selectLoggedInUser.clearResult();
-
     return this.afAuth
       .signOut()
       .then(() => this.router.navigateByUrl('/login'));
@@ -72,7 +61,10 @@ export class AuthService {
       );
 
     const userImg$ = this.loadUserProfileImage(userId).pipe(
-      tap(() => console.log('user'))
+      catchError(error => {
+        console.log(error);
+        return of(`../../../assets/images/avatar.png`);
+      })
     );
 
     const userInfo$ = combineLatest([user$, userImg$]);
