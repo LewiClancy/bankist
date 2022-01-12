@@ -14,6 +14,7 @@ import {
   tap,
 } from 'rxjs';
 import * as authActions from 'src/app/store/actions/auth.actions';
+import { startLoading } from 'src/app/store/actions/loading.actions';
 import * as authSelectors from 'src/app/store/selectors/auth.selectors';
 import { AccountOwner } from '../models';
 import { convertSnaps } from './firestore-utils.service';
@@ -43,6 +44,7 @@ export class AuthService {
       if (user) {
         this.store.dispatch(authActions.autoLoginSuccess({ userId: user.uid }));
         this.store.dispatch(authActions.setAuthentication());
+        this.store.dispatch(startLoading());
       } else {
         this.store.dispatch(authActions.resetAuthentication());
       }

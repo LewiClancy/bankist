@@ -23,10 +23,6 @@ export const reducer = createReducer(
       user,
     };
   }),
-  on(authActions.signOut, state => ({
-    ...state,
-    user: undefined,
-  })),
   on(authActions.setAuthentication, state => ({
     ...state,
     isAuthenticated: true,
@@ -34,5 +30,6 @@ export const reducer = createReducer(
   on(authActions.resetAuthentication, state => ({
     ...state,
     isAuthenticated: false,
+    user: undefined,
   }))
 );

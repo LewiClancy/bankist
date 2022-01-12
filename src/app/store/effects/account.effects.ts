@@ -22,7 +22,6 @@ export class AccountEffects {
       switchMap(({ accountId }) => {
         return this.accountService.loadAccountInfo(accountId).pipe(
           switchMap(accountInfo => {
-            this.store.dispatch(startLoading());
             return of(
               accountActions.loadAccountInfoSuccess({ accountInfo }),
               accountActions.loadRecentTransactions({ accountId })
@@ -45,11 +44,11 @@ export class AccountEffects {
       switchMap(({ accountId }) => {
         return this.accountService.loadRecentTransactions(accountId).pipe(
           switchMap(recentTransactions => {
-            this.store.dispatch(stopLoading());
             return of(
               accountActions.loadRecentTransactionsSuccess({
                 recentTransactions,
-              })
+              }),
+              stopLoading()
             );
           }),
           catchError(error => {

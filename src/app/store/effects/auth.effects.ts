@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { catchError, exhaustMap, Observer, of, switchMap } from 'rxjs';
+import { catchError, exhaustMap, of, switchMap } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
-import { Action, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AppState } from '../../store';
 import * as authActions from '../actions/auth.actions';
 import * as loadingActions from '../../store/actions/loading.actions';
@@ -10,7 +10,6 @@ import { setErrorMessage } from '../../store/actions/alert.actions';
 import { getErrorMessage } from '../../core/services';
 import { AuthService } from '../../core/services/auth.service';
 import { loadAccountInfo } from '../actions/account.actions';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable()
 export class AuthEffects {
@@ -22,10 +21,7 @@ export class AuthEffects {
         return this.authService.handleLogin(email, password).pipe(
           switchMap(({ user }) => {
             if (user) {
-              return of(
-                loadingActions.stopLoading(),
-                authActions.loginSuccess({ userId: user.uid })
-              );
+              return of(authActions.loginSuccess({ userId: user.uid }));
             } else {
               return of(
                 authActions.loginFailed({ errorCode: 'Unknown Error Occured' })
@@ -45,11 +41,7 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(authActions.loginSuccess, authActions.autoLoginSuccess),
       exhaustMap(({ userId }) => {
-        debugger;
-        return of(
-          authActions.loadUserInfo({ userId }),
-          loadingActions.startLoading()
-        );
+        return of(authActions.loadUserInfo({ userId }));
       })
     );
   });
@@ -61,11 +53,13 @@ export class AuthEffects {
         debugger;
         return this.authService.loadUserInfo(userId).pipe(
           switchMap(user => {
-            debugger;
             return of(authActions.loadUserInfoSuccess({ user }));
           }),
           catchError(error =>
-            of(authActions.loadUserInfoFailed({ errorCode: error.code }))
+            of(
+              authActions.loadUserInfoFailed({ errorCode: error.code }),
+              loadingActions.stopLoading()
+            )
           )
         );
       })
@@ -77,7 +71,6 @@ export class AuthEffects {
       return this.actions$.pipe(
         ofType(authActions.loadUserInfoSuccess),
         switchMap(() => {
-          this.store.dispatch(loadingActions.stopLoading());
           return this.router.navigateByUrl('/dashboard');
         })
       );
@@ -93,10 +86,6 @@ export class AuthEffects {
       })
     );
   });
-
-  // setAuthenticationStatus$ = createEffect(() => {
-
-  // });
 
   unsuccessfulLogin$ = createEffect(() => {
     return this.actions$.pipe(
@@ -123,7 +112,6 @@ export class AuthEffects {
     private router: Router,
     private actions$: Actions,
     private authService: AuthService,
-    private store: Store<AppState>,
-    private fireAuth: AngularFireAuth
+    private store: Store<AppState>
   ) {}
 }
