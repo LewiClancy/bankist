@@ -16,6 +16,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { debounceTime, distinctUntilChanged, map, Subscription } from 'rxjs';
 import { Transaction } from 'src/app/core/models';
+import { FirestoreDatePipe } from 'src/app/core/pipes/firestore-date.pipe';
 
 @Component({
   selector: 'app-transactions-list',
@@ -38,7 +39,7 @@ export class TransactionsListComponent
   filterControl = new FormControl();
   columnsToDisplay = ['date', 'accountId', 'kind', 'amount'];
 
-  constructor() {}
+  constructor(public firestoreDate: FirestoreDatePipe) {}
 
   ngDoCheck(): void {
     //force change detection on this @input

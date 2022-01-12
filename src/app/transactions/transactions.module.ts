@@ -12,6 +12,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import * as fromTransactions from './store';
 import { TransactionsEffects } from './store/transactions.effects';
+import { FirestoreDatePipe } from '../core/pipes/firestore-date.pipe';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { TransactionsEffects } from './store/transactions.effects';
     TransactionDetailsComponent,
     TransactionsStartComponent,
     TransactionsListComponent,
+    FirestoreDatePipe,
   ],
   imports: [
     CommonModule,
@@ -31,5 +33,6 @@ import { TransactionsEffects } from './store/transactions.effects';
     ),
     EffectsModule.forFeature([TransactionsEffects]),
   ],
+  providers: [FirestoreDatePipe],
 })
 export class TransactionsModule {}

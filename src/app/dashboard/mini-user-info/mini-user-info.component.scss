@@ -31,6 +31,14 @@
       aspect-ratio: 1 / 1;
       border-radius: 50%;
       object-fit: cover;
+      background: url(../../../assets/images/avatar.png);
+      background-size: cover;
+      background-repeat: none;
+    }
+
+    img::after {
+      content: '';
+      display: block;
     }
 
     figcaption {

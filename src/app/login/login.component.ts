@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { login } from '../store/auth.actions';
+import { Observable } from 'rxjs';
+import { login } from 'src/app/store/actions/auth.actions';
+import { selectIsLoading } from '../store/selectors/loading.selectors';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +15,7 @@ import { login } from '../store/auth.actions';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   passwordType: 'password' | 'text' = 'password';
+  isLoading$!: Observable<boolean>;
 
   constructor(
     private fb: FormBuilder,
@@ -24,6 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isLoading$ = this.store.select(selectIsLoading);
     const emailRegex = RegExp(
       /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     );

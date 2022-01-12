@@ -2,6 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Transaction } from 'src/app/core/models';
 import * as transactionActions from './transactions.actions';
+import { signOut } from 'src/app/store/actions/auth.actions';
 
 export const transactionsFeatureKey = 'transactions';
 
@@ -31,9 +32,7 @@ export const transactionsReducer = createReducer(
       selectedTransactionId: undefined,
     };
   }),
-  on(transactionActions.clearTransactionStore, state =>
-    transactionsAdapter.removeAll(state)
-  )
+  on(signOut, state => transactionsAdapter.removeAll(state))
 );
 
 const { selectAll } = transactionsAdapter.getSelectors();

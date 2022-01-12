@@ -17,18 +17,29 @@ import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers } from './store';
 import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { AuthEffects } from './store/effects/auth.effects';
+import { LoginComponent } from './login/login.component';
+import { AccountEffects } from './store/effects/account.effects';
+import { FirestoreDatePipe } from './core/pipes/firestore-date.pipe';
 
 const FirebaseUtilities = [
   AngularFireModule.initializeApp(environment.firebaseConfig),
   AngularFirestoreModule,
   AngularFireAuthModule,
   AngularFirestoreModule,
-  StoreModule.forRoot(reducers),
-  EffectsModule.forRoot([]),
-  !environment.production ? StoreDevtoolsModule.instrument() : [],
 ];
+
+const AppEffects = [AuthEffects, AccountEffects];
+
+const NgrxUtilities = [
+  StoreModule.forRoot(reducers),
+  EffectsModule.forRoot(AppEffects),
+  !environment.production ? StoreDevtoolsModule.instrument() : [],
+  StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal }),
+];
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -37,7 +48,7 @@ const FirebaseUtilities = [
     CoreModule,
     SharedModule,
     FirebaseUtilities,
-    StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal }),
+    NgrxUtilities,
   ],
   providers: [],
   bootstrap: [AppComponent],

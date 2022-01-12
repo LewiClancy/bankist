@@ -1,0 +1,20 @@
+:host {
+  @apply grid place-content-center;
+}
+
+header {
+  @apply py-8 flex flex-col items-center;
+}
+
+form {
+  @apply flex flex-col;
+  min-width: 18rem;
+}
+
+.actions {
+  @apply flex items-center justify-center gap-4;
+}
+
+span[matPrefix] {
+  @apply mr-8;
+}

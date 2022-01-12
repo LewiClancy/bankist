@@ -2,11 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   DoCheck,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
 } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { Transaction } from 'src/app/core/models';
 
 @Component({
@@ -17,20 +18,17 @@ import { Transaction } from 'src/app/core/models';
 })
 export class MiniTransactionsComponent implements OnInit, DoCheck {
   @Input() transactions: Transaction[] | null = [];
+  @Output() viewTransactions = new EventEmitter();
 
   dataSource!: MatTableDataSource<Transaction>;
   columnsToDisplay = ['account', 'type', 'amount'];
 
-  constructor(private router: Router) {}
+  constructor() {}
 
   ngOnInit(): void {}
 
   ngDoCheck(): void {
     //force change detection on this @input
-    this.dataSource = new MatTableDataSource(this.transactions ?? []); //check for undefined and null
-  }
-
-  viewTrandactionStatement() {
-    this.router.navigate(['transaction-statements']);
+    this.dataSource = new MatTableDataSource(this.transactions ?? []);
   }
 }

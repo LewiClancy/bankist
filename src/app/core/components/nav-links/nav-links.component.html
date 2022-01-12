@@ -1,0 +1,24 @@
+<nav-link-item *ngIf="!isLoggedIn" [link]="['/login']" matRipple>
+  Login
+</nav-link-item>
+<nav-link-item *ngIf="!isLoggedIn" [link]="['/create-account']" matRipple>
+  Signup
+</nav-link-item>
+<nav-link-item *ngIf="isLoggedIn" [link]="['/dashboard']" matRipple>
+  Dashboard
+</nav-link-item>
+<nav-link-item *ngIf="isLoggedIn" [link]="['/transactions']" matRipple>
+  Transactions
+</nav-link-item>
+
+<div class="self-center" *ngIf="isLoggedIn">
+  <button mat-icon-button [mat-menu-trigger-for]="manageAcc">
+    <mat-icon>manage_accounts</mat-icon>
+  </button>
+  <mat-menu #manageAcc="matMenu">
+    <button mat-menu-item (click)="this.signOut.emit()" *ngIf="isLoggedIn">
+      <mat-icon>logout</mat-icon>
+      <span>Sign Out</span>
+    </button>
+  </mat-menu>
+</div>

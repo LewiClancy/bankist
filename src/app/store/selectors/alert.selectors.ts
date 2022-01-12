@@ -6,8 +6,7 @@ export const selectAlertState = createFeatureSelector<fromAlert.AlertState>(
 );
 
 export const selectHasAlert = createSelector(selectAlertState, state => {
-  if (state.message) return true;
-  else return false;
+  return state.message ? true : false;
 });
 
 export const selectAlertMessage = createSelector(

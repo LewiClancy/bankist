@@ -3,68 +3,32 @@
     <div class="brand">
       <a routerLink="/">Bankist</a>
     </div>
-    <div class="hidden md:flex items-stretch gap-2 h-full">
-      <nav-link-item
-        *ngIf="!(isLoggedIn$ | async)"
-        [link]="['/auth', 'login']"
-        matRipple
-        >Login</nav-link-item
-      >
-      <nav-link-item
-        *ngIf="!(isLoggedIn$ | async)"
-        [link]="['/auth', 'signup']"
-        matRipple
-        >Signup</nav-link-item
-      >
-      <nav-link-item
-        *ngIf="isLoggedIn$ | async"
-        [link]="['/dashboard']"
-        matRipple
-        >Dashboard</nav-link-item
-      >
-      <nav-link-item
-        *ngIf="isLoggedIn$ | async"
-        [link]="['/transactions']"
-        matRipple
-        >Transactions</nav-link-item
-      >
-      <div class="self-center" *ngIf="isLoggedIn$ | async">
-        <button mat-icon-button [mat-menu-trigger-for]="manageAcc">
-          <mat-icon>manage_accounts</mat-icon>
-        </button>
-        <mat-menu #manageAcc="matMenu">
-          <button
-            mat-menu-item
-            (click)="onSignOut()"
-            *ngIf="isLoggedIn$ | async"
-          >
-            <mat-icon>logout</mat-icon>
-            <span>Sign Out</span>
-          </button>
-        </mat-menu>
-      </div>
+
+    <div class="hidden md:block h-full">
+      <app-nav-links
+        [isLoggedIn]="isLoggedIn$ | async"
+        (signOut)="onSignOut()"
+      ></app-nav-links>
     </div>
+
     <div *ngIf="isLoggedIn$ | async" class="md:hidden">
-      <button mat-icon-button (click)="toggleSidenav.emit('')">
+      <button mat-icon-button (click)="toggleSidenav.emit()">
         <mat-icon>menu</mat-icon>
       </button>
     </div>
+
     <div class="self-center md:hidden" *ngIf="!(isLoggedIn$ | async)">
       <button mat-icon-button [mat-menu-trigger-for]="menu">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <a
-          mat-menu-item
-          [routerLink]="['/auth', 'login']"
-          routerLinkActive="active"
-        >
+        <a mat-menu-item [routerLink]="['/login']" routerLinkActive="active">
           <mat-icon>login</mat-icon>
           <span>Switch to Login</span>
         </a>
         <a
           mat-menu-item
-          [routerLink]="['/auth', 'signup']"
+          [routerLink]="['/create-account']"
           routerLinkActive="active"
         >
           <mat-icon>account_circle</mat-icon>

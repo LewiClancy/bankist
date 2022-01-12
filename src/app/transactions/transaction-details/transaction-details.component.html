@@ -11,16 +11,6 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Transaction date</mat-label>
-        <input type="text" matInput formControlName="date" [readonly]="true" />
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Transaction Type</mat-label>
-        <input type="text" matInput formControlName="kind" [readonly]="true" />
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
         <mat-label>Sender / Recipient</mat-label>
         <input
           type="text"
@@ -28,6 +18,26 @@
           formControlName="accountId"
           [readonly]="true"
         />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Amount</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="amount"
+          [readonly]="true"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Transaction date</mat-label>
+        <input type="text" matInput formControlName="date" [readonly]="true" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Transaction Type</mat-label>
+        <input type="text" matInput formControlName="kind" [readonly]="true" />
       </mat-form-field>
 
       <mat-form-field appearance="outline">

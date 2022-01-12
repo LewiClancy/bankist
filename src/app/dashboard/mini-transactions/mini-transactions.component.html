@@ -6,9 +6,10 @@
   <div class="transactions__content">
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="account">
-        <th mat-header-cell *matHeaderCellDef>Recipient</th>
+        <th mat-header-cell *matHeaderCellDef>To / From</th>
         <td mat-cell *matCellDef="let transaction">
-          {{ transaction.accountId | titlecase }}
+          {{ transaction.account.ownerFirstName | titlecase }}
+          {{ transaction.account.ownerSurname | titlecase }}
         </td>
       </ng-container>
 
@@ -32,7 +33,7 @@
   </div>
 
   <div class="transactions__action">
-    <button mat-stroked-button (click)="viewTrandactionStatement()">
+    <button mat-stroked-button (click)="this.viewTransactions.emit()">
       <span>View all statements</span>
       <mat-icon color="primary">chevron_right</mat-icon>
     </button>
