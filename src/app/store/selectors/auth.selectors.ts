@@ -6,7 +6,7 @@ export const selectAuthState = createFeatureSelector<fromAuth.AuthState>(
 );
 
 export const selectIsLoggedIn = createSelector(selectAuthState, state => {
-  return state.user ? true : false;
+  return state.isAuthenticated;
 });
 
 export const selectLoggedInUser = createSelector(

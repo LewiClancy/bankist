@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { catchError, exhaustMap, of, switchMap } from 'rxjs';
+import { catchError, exhaustMap, Observer, of, switchMap } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { AppState } from '../../store';
 import * as authActions from '../actions/auth.actions';
 import * as loadingActions from '../../store/actions/loading.actions';
@@ -10,6 +10,7 @@ import { setErrorMessage } from '../../store/actions/alert.actions';
 import { getErrorMessage } from '../../core/services';
 import { AuthService } from '../../core/services/auth.service';
 import { loadAccountInfo } from '../actions/account.actions';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable()
 export class AuthEffects {
@@ -93,6 +94,10 @@ export class AuthEffects {
     );
   });
 
+  // setAuthenticationStatus$ = createEffect(() => {
+
+  // });
+
   unsuccessfulLogin$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(authActions.loginFailed, authActions.loadUserInfoFailed),
@@ -118,6 +123,7 @@ export class AuthEffects {
     private router: Router,
     private actions$: Actions,
     private authService: AuthService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private fireAuth: AngularFireAuth
   ) {}
 }

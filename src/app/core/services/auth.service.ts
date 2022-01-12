@@ -3,8 +3,16 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { catchError, combineLatest, from, map, Observable, tap } from 'rxjs';
+import { Action, Store } from '@ngrx/store';
+import {
+  catchError,
+  combineLatest,
+  from,
+  map,
+  Observable,
+  Observer,
+  tap,
+} from 'rxjs';
 import * as authActions from 'src/app/store/actions/auth.actions';
 import * as authSelectors from 'src/app/store/selectors/auth.selectors';
 import { AccountOwner } from '../models';
@@ -19,7 +27,7 @@ export class AuthService {
     private store: Store,
     private router: Router
   ) {
-    this.handleAutoSignIn();
+    this.handleAuthenticationStatus();
   }
 
   handleLogin(email: string, password: string) {
@@ -30,10 +38,14 @@ export class AuthService {
     return this.afAuth.authState;
   }
 
-  handleAutoSignIn() {
+  handleAuthenticationStatus() {
     this.afAuth.onAuthStateChanged(user => {
-      if (user)
+      if (user) {
         this.store.dispatch(authActions.autoLoginSuccess({ userId: user.uid }));
+        this.store.dispatch(authActions.setAuthentication());
+      } else {
+        this.store.dispatch(authActions.resetAuthentication());
+      }
     });
   }
 
@@ -80,5 +92,13 @@ export class AuthService {
       .child(`${accountId}.png`);
 
     return imageRef.getDownloadURL();
+  }
+
+  setAuthenticationStatus() {
+    return this.afAuth.onAuthStateChanged(user => {
+      return user
+        ? this.store.dispatch(authActions.setAuthentication())
+        : this.store.dispatch(authActions.setAuthentication());
+    });
   }
 }
