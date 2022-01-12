@@ -20,6 +20,7 @@ import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { AuthEffects } from './store/effects/auth.effects';
 import { LoginComponent } from './login/login.component';
 import { AccountEffects } from './store/effects/account.effects';
+import { FirestoreDatePipe } from './core/pipes/firestore-date.pipe';
 
 const FirebaseUtilities = [
   AngularFireModule.initializeApp(environment.firebaseConfig),
