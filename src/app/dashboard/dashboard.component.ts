@@ -7,7 +7,7 @@ import { AppState } from '../store';
 import { selectIsLoading } from '../store/selectors/loading.selectors';
 
 import * as accountSelectors from '../store/selectors/account.selectors';
-import { selectLoggedInUser } from '../store/selectors/auth.selectors';
+import { selectUser } from '../store/selectors/auth.selectors';
 import { Router } from '@angular/router';
 
 @Component({
@@ -30,7 +30,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.accountOwnerInfo$ = this.store.select(selectLoggedInUser);
+    this.accountOwnerInfo$ = this.store.select(selectUser);
 
     this.accountInfo$ = this.store.select(accountSelectors.selectAccountInfo);
 

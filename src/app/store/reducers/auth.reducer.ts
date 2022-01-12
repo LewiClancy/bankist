@@ -28,6 +28,7 @@ export const reducer = createReducer(
     isAuthenticated: true,
   })),
   on(authActions.resetAuthentication, state => ({
+    // Logout
     ...state,
     isAuthenticated: false,
     user: undefined,

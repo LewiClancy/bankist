@@ -48,7 +48,7 @@ export class AccountEffects {
               accountActions.loadRecentTransactionsSuccess({
                 recentTransactions,
               }),
-              stopLoading()
+              stopLoading() //dashboard is successfully loaded
             );
           }),
           catchError(error => {

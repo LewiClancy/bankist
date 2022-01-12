@@ -17,14 +17,12 @@ export const initialState: AccountState = {
 
 export const reducer = createReducer(
   initialState,
-
   on(accountActions.loadAccountInfoSuccess, (state, { accountInfo }) => {
     return {
       ...state,
       accountInfo,
     };
   }),
-
   on(
     accountActions.loadRecentTransactionsSuccess,
     (state, { recentTransactions }) => {
@@ -34,7 +32,6 @@ export const reducer = createReducer(
       };
     }
   ),
-
   on(signOut, state => ({
     ...state,
     accountInfo: undefined,

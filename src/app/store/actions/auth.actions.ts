@@ -42,9 +42,9 @@ export const loadUserInfoFailed = createAction(
 export const signOut = createAction('[Navigation Bar] Sign Out');
 
 export const setAuthentication = createAction(
-  '[Auth Effect] Set authenticated to true'
+  '[Auth Service] Set authenticated to true on login'
 );
 
 export const resetAuthentication = createAction(
-  '[Auth Effect] Set authenticated to false'
+  '[Auth Service] Set authenticated to false on logout'
 );

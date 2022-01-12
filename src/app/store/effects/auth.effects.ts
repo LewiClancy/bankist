@@ -24,13 +24,16 @@ export class AuthEffects {
               return of(authActions.loginSuccess({ userId: user.uid }));
             } else {
               return of(
-                authActions.loginFailed({ errorCode: 'Unknown Error Occured' })
+                authActions.loginFailed({ errorCode: 'Unknown Error Occured' }),
+                loadingActions.stopLoading()
               );
             }
           }),
           catchError(error => {
-            this.store.dispatch(loadingActions.stopLoading());
-            return of(authActions.loginFailed({ errorCode: error.code }));
+            return of(
+              authActions.loginFailed({ errorCode: error.code }),
+              loadingActions.stopLoading()
+            );
           })
         );
       })
@@ -41,6 +44,7 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(authActions.loginSuccess, authActions.autoLoginSuccess),
       exhaustMap(({ userId }) => {
+        this.router.navigateByUrl('/dashboard');
         return of(authActions.loadUserInfo({ userId }));
       })
     );
@@ -50,7 +54,6 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(authActions.loadUserInfo),
       switchMap(({ userId }) => {
-        debugger;
         return this.authService.loadUserInfo(userId).pipe(
           switchMap(user => {
             return of(authActions.loadUserInfoSuccess({ user }));
@@ -65,18 +68,6 @@ export class AuthEffects {
       })
     );
   });
-
-  loadUserInfoSuccess$ = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(authActions.loadUserInfoSuccess),
-        switchMap(() => {
-          return this.router.navigateByUrl('/dashboard');
-        })
-      );
-    },
-    { dispatch: false }
-  );
 
   loadAccountInfo$ = createEffect(() => {
     return this.actions$.pipe(
