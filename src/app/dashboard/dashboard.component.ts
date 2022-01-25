@@ -40,8 +40,4 @@ export class DashboardComponent implements OnInit {
 
     this.isAppLoading$ = this.store.select(selectIsLoading);
   }
-
-  onViewTransactions() {
-    this.router.navigateByUrl('/transactions');
-  }
 }

@@ -18,7 +18,6 @@ import { Transaction } from 'src/app/core/models';
 })
 export class MiniTransactionsComponent implements OnInit, DoCheck {
   @Input() transactions: Transaction[] | null = [];
-  @Output() viewTransactions = new EventEmitter();
 
   dataSource!: MatTableDataSource<Transaction>;
   columnsToDisplay = ['account', 'type', 'amount'];
