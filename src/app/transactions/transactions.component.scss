@@ -1,0 +1,7 @@
+.transactions {
+  @apply container mx-auto px-2 flex justify-center gap-4;
+}
+
+.transactions-list {
+  flex: 0 1 60%;
+}

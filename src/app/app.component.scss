@@ -1,0 +1,29 @@
+app-toolbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 4;
+}
+
+mat-sidenav-content {
+  margin-block-start: var(--margin-top);
+  min-height: calc(100vh - var(--margin-top));
+  padding-top: 40px;
+}
+mat-sidenav {
+  width: 17rem;
+}
+
+app-progress-bar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 5;
+}
+
+app-alert {
+  height: 40px;
+  width: 100%;
+  position: fixed;
+  top: var(--margin-top);
+}

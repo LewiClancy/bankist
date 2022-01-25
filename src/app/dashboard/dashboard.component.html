@@ -1,0 +1,39 @@
+<main class="container mx-auto" id="dashboard" *ngIf="!(isAppLoading$ | async)">
+  <app-mini-user-info
+    id="user-info"
+    class="hidden md:block"
+    [ownerInfo]="accountOwnerInfo$ | async"
+  ></app-mini-user-info>
+
+  <app-mini-summary
+    id="summary"
+    class="w-full"
+    [accountInfo]="accountInfo$ | async"
+  ></app-mini-summary>
+
+  <div id="links" class="">
+    <a mat-stroked-button>
+      <span>Transact</span>
+      <mat-icon color="primary">chevron_right</mat-icon>
+    </a>
+    <a mat-stroked-button>
+      <span>Loans</span> <mat-icon color="primary">chevron_right</mat-icon>
+    </a>
+    <a mat-stroked-button>
+      <span>Transactions</span>
+      <mat-icon color="primary">chevron_right</mat-icon>
+    </a>
+  </div>
+
+  <app-mini-transactions
+    id="transactions"
+    class="w-full"
+    [transactions]="transactions$ | async"
+    (viewTransactions)="onViewTransactions()"
+  ></app-mini-transactions>
+</main>
+
+<app-loading-page
+  *ngIf="isAppLoading$ | async"
+  class="loading"
+></app-loading-page>

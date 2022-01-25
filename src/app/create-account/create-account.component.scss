@@ -1,0 +1,23 @@
+:host {
+  @apply grid place-content-center;
+  grid-auto-columns: minmax(300px, 600px);
+}
+
+.field {
+  @apply flex flex-col;
+  padding-block-start: 1.5rem;
+  max-width: 40rem;
+}
+
+.names-field {
+  @apply flex flex-col sm:flex-row sm:gap-5;
+}
+
+span[matPrefix] {
+  margin-inline-end: 2rem;
+}
+
+button.mat-button-wrapper {
+  display: flex;
+  align-items: center;
+}

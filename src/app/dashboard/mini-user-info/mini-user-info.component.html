@@ -1,0 +1,18 @@
+<section class="user__card">
+  <div class="user__header"></div>
+  <figure class="user__content" aria-label="user-information">
+    <img [src]="ownerInfo?.displayImage" alt="Your profile picture" />
+    <figcaption class="text-lg text-center">
+      Welcome back, <br />
+      <!-- TODO Add a service to display greeting -->
+      <span
+        >{{ ownerInfo?.firstName | titlecase }}
+        {{ ownerInfo?.surname | titlecase }}</span
+      >
+    </figcaption>
+  </figure>
+  <a class="user__action" mat-stroked-button [routerLink]="['/user-info']">
+    <span>Profile Info</span>
+    <mat-icon color="primary">chevron_right</mat-icon>
+  </a>
+</section>

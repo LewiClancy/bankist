@@ -1,0 +1,51 @@
+{
+  "kind": "identitytoolkit#DownloadAccountResponse",
+  "users": [
+    {
+      "localId": "C0Qa7I0XoCyeSc4ZL1UDhMlAYZTb",
+      "createdAt": "1643043412498",
+      "lastLoginAt": "1643043412497",
+      "displayName": "Davis Wairimu",
+      "photoUrl": "",
+      "emailVerified": false,
+      "email": "test@test.com",
+      "salt": "fakeSalt7sbgeyPjVCOatKXd2d1X",
+      "passwordHash": "fakeHash:salt=fakeSalt7sbgeyPjVCOatKXd2d1X:password=123456",
+      "passwordUpdatedAt": 1643043412498,
+      "validSince": "1643043412",
+      "providerUserInfo": [
+        {
+          "providerId": "password",
+          "email": "test@test.com",
+          "federatedId": "test@test.com",
+          "rawId": "test@test.com",
+          "displayName": "Davis Wairimu",
+          "photoUrl": ""
+        }
+      ]
+    },
+    {
+      "localId": "C75DvwaH59mj2QTRzPS5CtuCvJB9",
+      "createdAt": "1643043383581",
+      "lastLoginAt": "1643043383580",
+      "displayName": "Lewis Ndungu",
+      "photoUrl": "",
+      "emailVerified": false,
+      "email": "lewisndungu3@gmail.com",
+      "salt": "fakeSalt7WfKLWyTOLw7h16MV19C",
+      "passwordHash": "fakeHash:salt=fakeSalt7WfKLWyTOLw7h16MV19C:password=9326Kalewi",
+      "passwordUpdatedAt": 1643043383581,
+      "validSince": "1643043383",
+      "providerUserInfo": [
+        {
+          "providerId": "password",
+          "email": "lewisndungu3@gmail.com",
+          "federatedId": "lewisndungu3@gmail.com",
+          "rawId": "lewisndungu3@gmail.com",
+          "displayName": "Lewis Ndungu",
+          "photoUrl": ""
+        }
+      ]
+    }
+  ]
+}

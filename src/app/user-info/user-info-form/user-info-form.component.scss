@@ -1,0 +1,27 @@
+main {
+  --template-columns: '1fr';
+  display: grid;
+
+  grid-template-columns: var(--template-columns);
+  grid-template-areas:
+    'image'
+    'form';
+
+  @media (min-width: 768px) {
+    --template-columns: 200px 1fr;
+    grid-template-areas: 'image form';
+  }
+  @media (min-width: 1024px) {
+    --template-columns: 250px 1fr;
+  }
+}
+
+.profile-photo {
+  @apply justify-self-center flex place-content-center relative md:flex-col md:justify-start md:gap-6;
+  grid-area: image;
+}
+
+.info-form {
+  @apply flex flex-col;
+  grid-area: form;
+}

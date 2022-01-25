@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  min-height: 100vh;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+:root {
+  --clr-primary: #673ab7;
+  --clr-accent: #673ab7de;
+  --clr-white: #fff;
+  --clr-border: lightgray;
+  --box-shadow: 0 0 5px 0 rgba(0 0 0 / 0.25);
+  --box-shadow-huge: 0 0 10px 0 rgba(0 0 0 / 0.25);
+  --box-border: var(--border-width, 1px) solid var(--clr-border);
+  --margin-top: clamp(56px, 10vw, 64px);
+  --border: 1px solid var(--clr-border);
+}
+
+.no-mb {
+  margin-block-end: 0 !important;
+}

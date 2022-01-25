@@ -1,0 +1,11 @@
+<div
+  *ngIf="displayAlert$ | async"
+  role="banner"
+  aria-describedat="errorMessage"
+  class="bg-red-200 flex justify-between items-center md:px-5 md:py-0.5"
+>
+  <p class="no-mb" id="errorMessage">{{ message$ | async }}</p>
+  <button mat-icon-button aria-label="Dismiss alert" (click)="onDismissAlert()">
+    <mat-icon aria-hidden="true"> close </mat-icon>
+  </button>
+</div>

@@ -1,0 +1,8 @@
+<main class="transactions my-2">
+  <app-transactions-list
+    class="transactions-list"
+    [transactions]="transactions$ | async"
+    (selectTransaction)="onTransactionSelected($event)"
+  ></app-transactions-list>
+  <router-outlet></router-outlet>
+</main>

@@ -1,0 +1,68 @@
+#dashboard {
+  --gap: 2rem;
+  display: grid;
+  row-gap: var(--gap);
+
+  grid-template-columns: minmax(12rem, 30rem);
+  grid-template-areas:
+    'summary'
+    'links'
+    'transactions';
+  justify-content: center;
+
+  @media (min-width: 768px) {
+    padding: 0.5rem 2rem 2rem 2rem;
+
+    --gap: 1.5rem;
+    column-gap: 1rem;
+    grid-template-columns: 1fr minmax(340px, 1fr);
+    grid-template-areas:
+      'user transactions'
+      'user transactions'
+      'summary transactions'
+      'summary links';
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      'user transactions'
+      'summary transactions'
+      '. links';
+  }
+
+  @media (min-width: 1280px) {
+    --gap: 0.5rem;
+    grid-template-columns: 300px max-content 400px;
+    grid-template-areas:
+      'user summary transactions'
+      'user links transactions';
+  }
+}
+
+#user-info {
+  grid-area: user;
+}
+
+#summary {
+  grid-area: summary;
+}
+
+#links {
+  grid-area: links;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-around;
+
+  @media (min-width: 1024px) and (max-width: 1280px) {
+    & > * {
+      flex: 1 1 100%;
+    }
+    transform: translatey(-60px);
+  }
+}
+
+#transactions {
+  grid-area: transactions;
+}

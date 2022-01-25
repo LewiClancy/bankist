@@ -1,0 +1,40 @@
+<mat-toolbar color="primary">
+  <nav class="nav">
+    <div class="brand">
+      <a routerLink="/">Bankist</a>
+    </div>
+
+    <div class="hidden md:block h-full">
+      <app-nav-links
+        [isLoggedIn]="isLoggedIn$ | async"
+        (signOut)="onSignOut()"
+      ></app-nav-links>
+    </div>
+
+    <div *ngIf="isLoggedIn$ | async" class="md:hidden">
+      <button mat-icon-button (click)="toggleSidenav.emit()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+
+    <div class="self-center md:hidden" *ngIf="!(isLoggedIn$ | async)">
+      <button mat-icon-button [mat-menu-trigger-for]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <a mat-menu-item [routerLink]="['/login']" routerLinkActive="active">
+          <mat-icon>login</mat-icon>
+          <span>Switch to Login</span>
+        </a>
+        <a
+          mat-menu-item
+          [routerLink]="['/create-account']"
+          routerLinkActive="active"
+        >
+          <mat-icon>account_circle</mat-icon>
+          <span>Switch to Sign up</span>
+        </a>
+      </mat-menu>
+    </div>
+  </nav>
+</mat-toolbar>

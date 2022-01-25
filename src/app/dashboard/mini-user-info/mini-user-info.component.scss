@@ -1,0 +1,76 @@
+.user {
+  &__card {
+    border: var(--box-border);
+    border-radius: 5px;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 3rem auto 4rem;
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition: all 500ms ease;
+
+      &:hover {
+        box-shadow: var(--box-shadow);
+      }
+    }
+  }
+  &__header {
+    padding-inline: 1rem;
+    color: #fff;
+    background-color: var(--clr-accent);
+  }
+
+  &__content {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    img {
+      width: 40%;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      object-fit: cover;
+      background: url(../../../assets/images/avatar.png);
+      background-size: cover;
+      background-repeat: none;
+    }
+
+    img::after {
+      content: '';
+      display: block;
+    }
+
+    figcaption {
+      padding-block-end: 3rem;
+    }
+  }
+
+  &__action {
+    align-self: end;
+    justify-self: end;
+    margin: 0 1rem 1rem 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .user {
+    &__card {
+      height: 100%;
+    }
+    &__content {
+      flex-direction: column;
+      align-items: center;
+
+      img {
+        width: 60%;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+      }
+
+      figcaption {
+        padding-block-start: 2.5rem;
+      }
+    }
+  }
+}

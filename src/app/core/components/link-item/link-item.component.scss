@@ -1,0 +1,37 @@
+:host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-inline: 0.25rem;
+}
+
+.active-indicator {
+  height: 4px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 500ms ease, opacity 250ms ease-in;
+}
+
+:host:hover {
+  .active-indicator {
+    transform: translateY(0);
+    opacity: 1;
+    background-color: #dbc1ff;
+  }
+}
+
+a.active,
+a.focus-within {
+  + .active-indicator {
+    transform: translateY(0);
+    opacity: 1;
+    background-color: #f3edfc;
+  }
+}

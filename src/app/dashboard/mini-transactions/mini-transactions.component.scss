@@ -1,0 +1,42 @@
+table {
+  width: 100%;
+}
+
+.transactions {
+  &__card {
+    border: var(--box-border);
+    border-radius: 5px;
+    display: grid;
+    grid-template-rows: 3rem auto 4rem;
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition: all 500ms ease;
+      &:hover {
+        box-shadow: 0 0 5px 0 rgba(#000, 0.25);
+      }
+    }
+  }
+  &__title {
+    padding-inline: 1rem;
+    color: #fff;
+    background-color: var(--clr-accent);
+    border-bottom: var(--box-border);
+    display: flex;
+    align-items: center;
+  }
+  &__content {
+    padding-block-end: 1rem;
+  }
+  &__action {
+    align-self: end;
+    justify-self: end;
+    margin: 0 1rem 1rem 0;
+  }
+
+  @media screen and (min-width: 768px) {
+    &__content {
+      overflow-y: scroll;
+      height: 370px;
+    }
+  }
+}

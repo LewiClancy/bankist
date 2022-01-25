@@ -1,0 +1,22 @@
+:host {
+  flex: 0 1 35%;
+}
+
+.transaction-details {
+  min-height: 80vh;
+  border: var(--border);
+
+  &__header {
+    color: #fff;
+    background-color: var(--clr-accent);
+    padding: 0.5rem 1rem;
+    border-bottom: var(--border);
+
+    display: flex;
+    align-items: center;
+  }
+
+  &__content {
+    padding: 1rem;
+  }
+}

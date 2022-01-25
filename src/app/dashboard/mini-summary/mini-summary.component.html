@@ -1,0 +1,20 @@
+<section class="summary__card sm:overflow-hidden">
+  <div class="summary__title text-xl lg:text-2xl" id="summary">
+    Account summary
+  </div>
+  <div
+    class="summary__content md:p-2 md:justify-items-center"
+    aria-labelledby="summary"
+  >
+    <p class="text-black">Account Id</p>
+    <p class="">{{ accountInfo?.id }}</p>
+    <p class="text-black">Account balance</p>
+    <p class="">{{ accountInfo?.float | currency }}</p>
+    <p class="text-black">Account status</p>
+    <p class="">{{ accountInfo?.status | titlecase }}</p>
+  </div>
+  <a mat-stroked-button class="summary__action">
+    <span>View account Summary</span>
+    <mat-icon color="primary">chevron_right</mat-icon>
+  </a>
+</section>
