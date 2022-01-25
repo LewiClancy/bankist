@@ -1,14 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
 import { AccountOwner, Address } from 'src/app/core/models';
 import * as authActions from '../actions/auth.actions';
-
-export const authFeatureKey = 'auth';
-
 export interface AuthState {
   isAuthenticated: boolean;
   user: AccountOwner | undefined;
   userAddresses: Address[] | undefined;
 }
+
+export const authFeatureKey = 'auth';
 
 export const initialState: AuthState = {
   isAuthenticated: false,
