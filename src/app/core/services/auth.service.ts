@@ -62,7 +62,6 @@ export class AuthService {
 
     const userImg$ = this.loadUserProfileImage(userId).pipe(
       catchError(error => {
-        console.log(error);
         return of(`../../../assets/images/avatar.png`);
       })
     );

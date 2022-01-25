@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  useEmulators: false,
   firebaseConfig: {
     apiKey: 'AIzaSyAI1o8Lv9aq5C9jglWva_Zxl1atuaeHEf0',
     authDomain: 'bankist-e62d0.firebaseapp.com',

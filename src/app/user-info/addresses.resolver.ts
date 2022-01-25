@@ -3,6 +3,7 @@ import { Resolve } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {
   filter,
+  first,
   Observable,
   skip,
   skipUntil,
@@ -11,14 +12,10 @@ import {
   takeWhile,
   tap,
 } from 'rxjs';
-import { AccountOwner, Address } from '../core/models';
+import { Address } from '../core/models';
 import { AppState } from '../store';
 import { loadUserAddresses } from '../store/actions/auth.actions';
-import {
-  selectUser,
-  selectUserAddresses,
-} from '../store/selectors/auth.selectors';
-import { UserInfoService } from './user-info.service';
+import { selectUserAddresses } from '../store/selectors/auth.selectors';
 
 @Injectable()
 export class AddressResolver implements Resolve<Address[] | undefined> {
@@ -26,8 +23,7 @@ export class AddressResolver implements Resolve<Address[] | undefined> {
     this.store.dispatch(loadUserAddresses());
     return this.store.select(selectUserAddresses).pipe(
       filter(add => add !== undefined),
-      take(1),
-      tap(add => console.log(add))
+      first()
     );
   }
 

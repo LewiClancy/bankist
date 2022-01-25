@@ -42,6 +42,7 @@
       type="button"
       (click)="togglePasswordVisibility()"
     >
+      <span class="sr-only">Toggle Password Visibility</span>
       <mat-icon>
         {{ passwordType === 'password' ? 'visibility_off' : 'visibility' }}
       </mat-icon>

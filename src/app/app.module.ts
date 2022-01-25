@@ -79,24 +79,6 @@ const NgrxUtilities = [
   ],
   bootstrap: [AppComponent],
   providers: [
-    {
-      provide: USE_AUTH_EMULATOR,
-      useValue: environment.useEmulators
-        ? ['https://localhost/9099']
-        : undefined,
-    },
-    {
-      provide: USE_FIRESTORE_EMULATOR,
-      useValue: environment.useEmulators
-        ? ['http://localhost/8080']
-        : undefined,
-    },
-    {
-      provide: USE_FUNCTIONS_EMULATOR,
-      useValue: environment.useEmulators
-        ? ['http://localhost/5001']
-        : undefined,
-    },
-  ],
+  ]
 })
 export class AppModule {}

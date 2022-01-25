@@ -1,8 +1,13 @@
 <main class="gap-10 mb-10">
   <div class="profile-photo">
     <img
-      [src]="user?.displayImage"
+      [src]="
+        userInfoPresenter.user.displayImage ??
+        '../../../assets/images/avatar.png'
+      "
       alt=""
+      width="200px"
+      height="200px"
       class="rounded-full w-9/12 md:self-start md:w-auto"
     />
 
@@ -21,7 +26,7 @@
 
   <form
     class="info-form"
-    [formGroup]="userInfoForm"
+    [formGroup]="userInfoPresenter.userInfoForm"
     (ngSubmit)="onUpdateInfo()"
   >
     <mat-form-field appearance="outline">
@@ -118,7 +123,7 @@
         color="primary"
         class="flex-1"
         *ngIf="isEditable"
-        [disabled]="!userInfoForm.dirty"
+        [disabled]="!userInfoPresenter.userInfoForm.dirty"
       >
         <span class="">SAVE</span>
       </button>
