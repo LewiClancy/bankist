@@ -90,7 +90,7 @@ export class AuthService {
   loadUserAddresses(userId: string) {
     const addressRef = `account-owners/${userId}/addresses`;
 
-    return this.afs.collection<Address>(addressRef).valueChanges();
+    return this.afs.collection<Address>(addressRef).valueChanges('id');
   }
 
   setAuthenticationStatus() {

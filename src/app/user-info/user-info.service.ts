@@ -1,35 +1,22 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AccountOwner, Address } from '../core/models';
 
 @Injectable()
 export class UserInfoService {
-  private _testUser: AccountOwner = {
-    id: 'itslewisndungu',
-    firstName: 'Lewis',
-    surname: 'Ngigi',
-    displayImage: '../../assets/images/image-jeremy.png',
-    email: 'lewisndungu@gmail.com',
-    accountId: '434354332',
-    dateOfBirth: {
-      seconds: Math.floor(new Date(2001, 4, 9).getTime() / 1000),
-      nanoseconds: 0,
-    },
-  };
+  constructor(private afs: AngularFirestore) {}
 
-  private _testUserAddresses: Array<Address> = [
-    {
-      city: 'Nairobi',
-      state: 'Kenya',
-    },
-  ];
+  updateUserInfo(userId: string, userInfo: AccountOwner) {
+    const ref = `account-owners/${userId}`;
 
-  constructor() {}
-
-  get testUser() {
-    return this._testUser;
+    return this.afs.doc<AccountOwner>(ref).update(userInfo);
+    // write the new user info
   }
 
-  get testUserAddresses() {
-    return this._testUserAddresses;
+  updateAddresses(userId: string, addresses: Address[]) {
+    const ref = `account-owners/${userId}/addresses`;
+
+    // this.afs.
+    // write the new address information
   }
 }
